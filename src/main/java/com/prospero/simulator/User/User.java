@@ -16,26 +16,26 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String county;
+    private String language;
     private String currency;
 
     public User() {
     }
 
-    public User(String name, String email, String password, String county, String currency) {
+    public User(String name, String email, String password, String language, String currency) {
         this.name = name;
         this.email= email;
         this.password = password;
-        this.county = county;
+        this.language = language;
         this.currency = currency;
     }
 
-    public User(Long id, String name, String email, String password, String county, String currency) {
+    public User(Long id, String name, String email, String password, String language, String currency) {
         this.id = id;
         this.name = name;
         this.email= email;
         this.password = password;
-        this.county = county;
+        this.language = language;
         this.currency = currency;
     }
 
@@ -71,12 +71,12 @@ public class User {
         this.password = password;
     }
 
-    public String getCounty() {
-        return county;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getCurrency() {
@@ -92,12 +92,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(county, user.county) && Objects.equals(currency, user.currency);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(language, user.language) && Objects.equals(currency, user.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, county, currency);
+        return Objects.hash(id, name, email, password, language, currency);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", county='" + county + '\'' +
+                ", language='" + language + '\'' +
                 ", currency='" + currency + '\'' +
                 '}';
     }
