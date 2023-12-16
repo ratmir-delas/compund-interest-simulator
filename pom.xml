@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo_spring</artifactId>
+	<artifactId>prospero</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo_spring</name>
 	<description>Demo project for Spring Boot</description>
@@ -38,6 +38,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

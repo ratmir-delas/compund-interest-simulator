@@ -46,6 +46,10 @@
                     <label for="password" data-lang-key="passwordLabel">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+                <div class="form-group">
+                    <label for="language" data-lang-key="languageLabel">Language:</label>
+                    <input type="text" class="form-control" id="language" name="language" required>
+                </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="registerButton">Register</button>
             </form>
         </div>
@@ -64,7 +68,8 @@
         const selectedOption = document.querySelector(`#languageSelect option[value="${lang}"]`);
         const flagCode = selectedOption.dataset.flag;
         const flagImg = document.createElement("img");
-        flagImg.src = `https://www.countryflags.io/${flagCode}/flat/32.png`;
+        flagImg.src = `../src/img/flags/${flagCode}/flat/32.png`;
+
         const languageName = selectedOption.textContent;
         selectedOption.textContent = '';
         selectedOption.appendChild(flagImg);
