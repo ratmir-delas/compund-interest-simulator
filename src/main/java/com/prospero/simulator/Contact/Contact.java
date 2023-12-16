@@ -1,4 +1,4 @@
-package com.example.demo_spring.Contact;
+package com.prospero.simulator.Contact;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

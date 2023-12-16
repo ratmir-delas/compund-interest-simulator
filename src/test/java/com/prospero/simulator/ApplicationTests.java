@@ -1,4 +1,4 @@
-package com.example.demo_spring;
+package com.prospero.simulator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

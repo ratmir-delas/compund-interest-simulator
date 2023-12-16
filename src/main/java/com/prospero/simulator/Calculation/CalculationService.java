@@ -1,7 +1,5 @@
-package com.example.demo_spring.Calculation;
+package com.prospero.simulator.Calculation;
 
-import com.example.demo_spring.User.User;
-import com.example.demo_spring.User.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

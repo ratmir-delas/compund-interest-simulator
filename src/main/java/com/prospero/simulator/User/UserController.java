@@ -1,4 +1,4 @@
-package com.example.demo_spring.User;
+package com.prospero.simulator.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

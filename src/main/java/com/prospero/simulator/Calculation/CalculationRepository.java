@@ -1,4 +1,4 @@
-package com.example.demo_spring.Calculation;
+package com.prospero.simulator.Calculation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

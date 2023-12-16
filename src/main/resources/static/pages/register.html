@@ -13,27 +13,14 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="form-group">
-                <label for="languageSelect"></label>
-                <select id="languageSelect" class="form-control" onchange="changeLanguage(this.value)">
-                    <!-- Generate language options dynamically -->
-                    <script>
-                        const selectElement = document.getElementById("languageSelect");
-                        for (const langCode in languageData) {
-                            if (languageData.hasOwnProperty(langCode)) {
-                                const langInfo = languageData[langCode];
-                                const option = document.createElement("option");
-                                option.value = langCode;
-                                option.textContent = `${langInfo.name} (${langCode.toUpperCase()})`;
-                                option.dataset.flag = langInfo.flag;
-                                selectElement.appendChild(option);
-                            }
-                        }
-                    </script>
-                </select>
-            </div>
             <h2 class="text-center" data-lang-key="heading">User Registration</h2>
             <form id="userForm">
+                <div class="form-group">
+                    <label for="language" data-lang-key="languageLabel">Language:</label>
+                    <select id="language" class="form-control" name="language" onchange="changeLanguage(this.value)" required>
+                        <script>generateLanguageOptions()</script>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="name" data-lang-key="nameLabel">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -46,76 +33,13 @@
                     <label for="password" data-lang-key="passwordLabel">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <div class="form-group">
-                    <label for="language" data-lang-key="languageLabel">Language:</label>
-                    <input type="text" class="form-control" id="language" name="language" required>
-                </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="registerButton">Register</button>
             </form>
         </div>
     </div>
 </div>
 
-<script>
-    // Assuming registration.js defines a variable named translations
-    function changeLanguage(lang) {
-        document.querySelectorAll("[data-lang-key]").forEach(elem => {
-            const key = elem.getAttribute("data-lang-key");
-            elem.textContent = translations[lang][key] || "Key not found";
-        });
-
-        // Display the country flag alongside the language name
-        const selectedOption = document.querySelector(`#languageSelect option[value="${lang}"]`);
-        const flagCode = selectedOption.dataset.flag;
-        const flagImg = document.createElement("img");
-        flagImg.src = `../src/img/flags/${flagCode}/flat/32.png`;
-
-        const languageName = selectedOption.textContent;
-        selectedOption.textContent = '';
-        selectedOption.appendChild(flagImg);
-        selectedOption.appendChild(document.createTextNode(languageName));
-    }
-
-    // Initialize with default language
-    changeLanguage('pt');
-
-
-    // Handle form submission
-    document.getElementById('userForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value
-        };
-
-        fetch('http://localhost:3000/api/v1/users/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
-            })
-            .then(data => {
-                console.log('Success:', data);
-                // Redirect to index page on successful registration
-                window.location.href = '/index.html'; // Adjust the URL as needed
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle errors here
-            });
-    });
-
-</script>
+<script src="register/script.js"></script>
 
 </body>
 </html>

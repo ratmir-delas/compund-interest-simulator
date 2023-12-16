@@ -1,4 +1,4 @@
-package com.example.demo_spring.Calculation;
+package com.prospero.simulator.Calculation;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
