@@ -21,11 +21,12 @@ public class Calculation {
     private int estimatedInflation;
     private int estimatedTax;
     private int capitalizationFrequency;
+    private Long userId;
 
     public Calculation() {
     }
 
-    public Calculation(int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency) {
+    public Calculation(int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, Long userId) {
         this.initialAmount = initialAmount;
         this.contributionAmount = contributionAmount;
         this.contributionFrequency = contributionFrequency;
@@ -34,9 +35,10 @@ public class Calculation {
         this.estimatedInflation = estimatedInflation;
         this.estimatedTax = estimatedTax;
         this.capitalizationFrequency = capitalizationFrequency;
+        this.userId = userId;
     }
 
-    public Calculation(Long id, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency) {
+    public Calculation(Long id, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, Long userId) {
         this.id = id;
         this.initialAmount = initialAmount;
         this.contributionAmount = contributionAmount;
@@ -46,6 +48,7 @@ public class Calculation {
         this.estimatedInflation = estimatedInflation;
         this.estimatedTax = estimatedTax;
         this.capitalizationFrequency = capitalizationFrequency;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -120,17 +123,25 @@ public class Calculation {
         this.capitalizationFrequency = capitalizationFrequency;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calculation that = (Calculation) o;
-        return Objects.equals(id, that.id) && initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency;
+        return initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency && Objects.equals(id, that.id) && Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency);
+        return Objects.hash(id, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency, userId);
     }
 
     @Override
@@ -145,6 +156,7 @@ public class Calculation {
                 ", estimatedInflation=" + estimatedInflation +
                 ", estimatedTax=" + estimatedTax +
                 ", capitalizationFrequency=" + capitalizationFrequency +
+                ", userId=" + userId +
                 '}';
     }
 }

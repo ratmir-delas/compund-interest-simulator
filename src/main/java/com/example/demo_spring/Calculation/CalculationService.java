@@ -23,6 +23,10 @@ public class CalculationService {
         return calculationRepository.findAll();
     }
 
+    public List<Calculation> getAllCalculationsByUserId(Long userId) {
+        return calculationRepository.findByUserId(userId);
+    }
+
     public void addCalculation(Calculation calculation) {
         calculationRepository.save(calculation);
     }
@@ -42,6 +46,7 @@ public class CalculationService {
             calculation.setEstimatedInflation(updatedCalculation.getEstimatedInflation());
             calculation.setEstimatedTax(updatedCalculation.getEstimatedTax());
             calculation.setCapitalizationFrequency(updatedCalculation.getCapitalizationFrequency());
+            calculation.setUserId(updatedCalculation.getUserId());
 
             calculationRepository.save(calculation);
         }
