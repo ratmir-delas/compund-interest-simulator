@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title">Register User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
+    <script src="../js/languages/pages-translation/registration.js"></script>
+    <script src="../js/languages/languages.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="form-group">
+                <label for="languageSelect"></label>
+                <select id="languageSelect" class="form-control" onchange="changeLanguage(this.value)">
+                    <!-- Generate language options dynamically -->
+                    <script>
+                        const selectElement = document.getElementById("languageSelect");
+                        for (const langCode in languageData) {
+                            if (languageData.hasOwnProperty(langCode)) {
+                                const langInfo = languageData[langCode];
+                                const option = document.createElement("option");
+                                option.value = langCode;
+                                option.textContent = `${langInfo.name} (${langCode.toUpperCase()})`;
+                                option.dataset.flag = langInfo.flag;
+                                selectElement.appendChild(option);
+                            }
+                        }
+                    </script>
+                </select>
+            </div>
+            <h2 class="text-center" data-lang-key="heading">User Registration</h2>
+            <form action="http://localhost:3000/api/v1/users/" method="post">
+                <div class="form-group">
+                    <label for="name" data-lang-key="nameLabel">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-lang-key="emailLabel">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" data-lang-key="passwordLabel">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" data-lang-key="registerButton">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Assuming registration.js defines a variable named translations
+    function changeLanguage(lang) {
+        document.querySelectorAll("[data-lang-key]").forEach(elem => {
+            const key = elem.getAttribute("data-lang-key");
+            elem.textContent = translations[lang][key] || "Key not found";
+        });
+
+        // Display the country flag alongside the language name
+        const selectedOption = document.querySelector(`#languageSelect option[value="${lang}"]`);
+        const flagCode = selectedOption.dataset.flag;
+        const flagImg = document.createElement("img");
+        flagImg.src = `https://www.countryflags.io/${flagCode}/flat/32.png`;
+        const languageName = selectedOption.textContent;
+        selectedOption.textContent = '';
+        selectedOption.appendChild(flagImg);
+        selectedOption.appendChild(document.createTextNode(languageName));
+    }
+
+    // Initialize with default language
+    changeLanguage('pt');
+</script>
+
+</body>
+</html>
