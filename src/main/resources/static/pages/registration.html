@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang-key="title">Register User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
-    <script src="../js/languages/pages-translation/registration.js"></script>
-    <script src="../js/languages/languages.js"></script>
+    <script src="../src/js/internationalisation/pages-translation/registration.js"></script>
+    <script src="../src/js/internationalisation/languages.js"></script>
 </head>
 <body>
 
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <h2 class="text-center" data-lang-key="heading">User Registration</h2>
-            <form action="http://localhost:3000/api/v1/users/" method="post">
+            <form id="userForm">
                 <div class="form-group">
                     <label for="name" data-lang-key="nameLabel">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -73,6 +73,43 @@
 
     // Initialize with default language
     changeLanguage('pt');
+
+
+    // Handle form submission
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        fetch('http://localhost:3000/api/v1/users/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Redirect to index page on successful registration
+                window.location.href = '/index.html'; // Adjust the URL as needed
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle errors here
+            });
+    });
+
 </script>
 
 </body>
