@@ -44,7 +44,7 @@ public class CalculationService {
             calculation.setEstimatedInflation(updatedCalculation.getEstimatedInflation());
             calculation.setEstimatedTax(updatedCalculation.getEstimatedTax());
             calculation.setCapitalizationFrequency(updatedCalculation.getCapitalizationFrequency());
-            calculation.setUserId(updatedCalculation.getUserId());
+            calculation.setUser(updatedCalculation.getUser());
 
             calculationRepository.save(calculation);
         }

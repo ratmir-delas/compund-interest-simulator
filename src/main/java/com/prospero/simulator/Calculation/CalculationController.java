@@ -21,9 +21,9 @@ public class CalculationController {
         return calculationService.getAllCalculations();
     }
 
-    @GetMapping("/{id}")
-    public Calculation getCalculation(@PathVariable Long id) {
-        return calculationService.getCalculation(id);
+    @GetMapping("/{calculation_id}")
+    public Calculation getCalculation(@PathVariable Long calculation_id) {
+        return calculationService.getCalculation(calculation_id);
     }
 
     @PostMapping("/")

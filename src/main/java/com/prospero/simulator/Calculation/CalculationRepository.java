@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CalculationRepository extends JpaRepository<Calculation, Long> {
-    @Query("SELECT c FROM Calculation c WHERE c.userId = ?1")
+    @Query("SELECT c FROM Calculation c WHERE c.user = ?1")
     List<Calculation> findByUserId(Long userId);
 }
