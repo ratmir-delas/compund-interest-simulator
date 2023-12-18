@@ -53,7 +53,7 @@ const translations = {
         "passwordLabel": "Passwort:",
         "registerButton": "Registrieren"
     },
-    "kk": {
+    "kz": {
         "title": "Пайдаланушыны тіркеу", // Kazakh
         "heading": "Пайдаланушы тіркеу",
         "languageLabel": "Тіл:",
