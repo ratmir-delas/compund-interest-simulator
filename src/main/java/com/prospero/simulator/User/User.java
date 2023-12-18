@@ -9,8 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private Long id;
+    private Long user_id;
     private String name;
     private String email;
     private String password;
@@ -28,8 +27,8 @@ public class User {
         this.currency = currency;
     }
 
-    public User(Long id, String name, String email, String password, String language, String currency) {
-        this.id = id;
+    public User(Long user_id, String name, String email, String password, String language, String currency) {
+        this.user_id = user_id;
         this.name = name;
         this.email= email;
         this.password = password;
@@ -37,12 +36,12 @@ public class User {
         this.currency = currency;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long id) {
+        this.user_id = id;
     }
 
     public String getName() {
@@ -90,18 +89,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(language, user.language) && Objects.equals(currency, user.currency);
+        return Objects.equals(user_id, user.user_id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(language, user.language) && Objects.equals(currency, user.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, language, currency);
+        return Objects.hash(user_id, name, email, password, language, currency);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

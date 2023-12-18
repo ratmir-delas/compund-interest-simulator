@@ -9,8 +9,7 @@ public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contact_id")
-    private Long id;
+    private Long contact_id;
     private String name;
     private String email;
     private String message;
@@ -26,20 +25,20 @@ public class Contact {
         this.sentDateTime = sentDateTime;
     }
 
-    public Contact(long id, String name, String email, String message, long sentDateTime) {
-        this.id = id;
+    public Contact(long contact_id, String name, String email, String message, long sentDateTime) {
+        this.contact_id = contact_id;
         this.name = name;
         this.email = email;
         this.message = message;
         this.sentDateTime = sentDateTime;
     }
 
-    public Long getId() {
-        return id;
+    public Long getContact_id() {
+        return contact_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setContact_id(Long id) {
+        this.contact_id = id;
     }
 
     public String getName() {
@@ -79,18 +78,18 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return sentDateTime == contact.sentDateTime && Objects.equals(id, contact.id) && Objects.equals(name, contact.name) && Objects.equals(email, contact.email) && Objects.equals(message, contact.message);
+        return sentDateTime == contact.sentDateTime && Objects.equals(contact_id, contact.contact_id) && Objects.equals(name, contact.name) && Objects.equals(email, contact.email) && Objects.equals(message, contact.message);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, message, sentDateTime);
+        return Objects.hash(contact_id, name, email, message, sentDateTime);
     }
 
     @Override
     public String toString() {
         return "Contact{" +
-                "id=" + id +
+                "contact_id=" + contact_id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", message='" + message + '\'' +

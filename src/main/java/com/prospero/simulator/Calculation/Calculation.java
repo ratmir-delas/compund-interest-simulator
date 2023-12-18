@@ -11,7 +11,7 @@ public class Calculation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calculation_id")
-    private Long id;
+    private Long calculation_id;
     private int initialAmount;
     private int contributionAmount;
     private int contributionFrequency;
@@ -39,8 +39,8 @@ public class Calculation {
         this.user = user;
     }
 
-    public Calculation(Long id, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
-        this.id = id;
+    public Calculation(Long calculation_id, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
+        this.calculation_id = calculation_id;
         this.initialAmount = initialAmount;
         this.contributionAmount = contributionAmount;
         this.contributionFrequency = contributionFrequency;
@@ -52,12 +52,12 @@ public class Calculation {
         this.user = user;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCalculation_id() {
+        return calculation_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCalculation_id(Long id) {
+        this.calculation_id = id;
     }
 
     public int getInitialAmount() {
@@ -137,18 +137,18 @@ public class Calculation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calculation that = (Calculation) o;
-        return initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency && Objects.equals(id, that.id) && Objects.equals(user, that.user);
+        return initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency && Objects.equals(calculation_id, that.calculation_id) && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency, user);
+        return Objects.hash(calculation_id, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency, user);
     }
 
     @Override
     public String toString() {
         return "Calculation{" +
-                "id=" + id +
+                "calculation_id=" + calculation_id +
                 ", initialAmount=" + initialAmount +
                 ", contributionAmount=" + contributionAmount +
                 ", contributionFrequency=" + contributionFrequency +
@@ -157,7 +157,7 @@ public class Calculation {
                 ", estimatedInflation=" + estimatedInflation +
                 ", estimatedTax=" + estimatedTax +
                 ", capitalizationFrequency=" + capitalizationFrequency +
-                ", userId=" + user +
+                ", user=" + user +
                 '}';
     }
 }
