@@ -6,7 +6,8 @@ const translations = {
         "nameLabel": "Name:",
         "emailLabel": "Email:",
         "passwordLabel": "Password:",
-        "registerButton": "Register"
+        "registerButton": "Register",
+        "loginLink": "Already have an account? Login here."
     },
     "es": {
         "title": "Registrar Usuario",
@@ -15,16 +16,18 @@ const translations = {
         "nameLabel": "Nombre:",
         "emailLabel": "Correo Electrónico:",
         "passwordLabel": "Contraseña:",
-        "registerButton": "Registrar"
+        "registerButton": "Registrar",
+        "loginLink": "¿Ya tienes una cuenta? Inicia sesión aquí."
     },
-    "pt": {
+    "pt-pt": {
         "title": "Registar Utilizador",
         "heading": "Registo de Utilizador",
         "languageLabel": "Idioma:",
         "nameLabel": "Nome:",
         "emailLabel": "Email:",
         "passwordLabel": "Palavra-passe:",
-        "registerButton": "Registar"
+        "registerButton": "Registar",
+        "loginLink": "Já tem uma conta? Inicie sessão aqui."
     },
     "pt-br": {
         "title": "Registrar Usuário",
@@ -33,7 +36,8 @@ const translations = {
         "nameLabel": "Nome:",
         "emailLabel": "Email:",
         "passwordLabel": "Senha:",
-        "registerButton": "Registrar"
+        "registerButton": "Registrar",
+        "loginLink": "Já tem uma conta? Inicie sessão aqui."
     },
     "ru": {
         "title": "Зарегистрировать пользователя", // Russian
@@ -42,7 +46,8 @@ const translations = {
         "nameLabel": "Имя:",
         "emailLabel": "Email:",
         "passwordLabel": "Пароль:",
-        "registerButton": "Зарегистрировать"
+        "registerButton": "Зарегистрировать",
+        "loginLink": "Уже есть аккаунт? Войдите здесь."
     },
     "de": {
         "title": "Benutzer registrieren", // German
@@ -51,7 +56,8 @@ const translations = {
         "nameLabel": "Name:",
         "emailLabel": "E-Mail:",
         "passwordLabel": "Passwort:",
-        "registerButton": "Registrieren"
+        "registerButton": "Registrieren",
+        "loginLink": "Haben Sie bereits ein Konto? Hier anmelden."
     },
     "kz": {
         "title": "Пайдаланушыны тіркеу", // Kazakh
@@ -60,7 +66,8 @@ const translations = {
         "nameLabel": "Аты:",
         "emailLabel": "Электронды пошта:",
         "passwordLabel": "Құпия сөз:",
-        "registerButton": "Тіркеу"
+        "registerButton": "Тіркеу",
+        "loginLink": "Ескі тіркелгіңіз бар ма? Мұнда кіру."
     },
     "fr": {
         "title": "Inscrire l'utilisateur", // French
@@ -69,7 +76,8 @@ const translations = {
         "nameLabel": "Nom:",
         "emailLabel": "Email:",
         "passwordLabel": "Mot de passe:",
-        "registerButton": "S'inscrire"
+        "registerButton": "S'inscrire",
+        "loginLink": "Vous avez déjà un compte? Connectez-vous ici."
     }
     // Add more languages as needed
 };

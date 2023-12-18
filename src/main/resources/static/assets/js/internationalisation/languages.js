@@ -1,5 +1,5 @@
 const languageData = {
-    "pt": { name: "Português", flag: "pt" },
+    "pt-pt": { name: "Português", flag: "pt" },
     "pt-br": { name: "Português brasileiro", flag: "br" },
     "en": { name: "English", flag: "gb" },
     "de": { name: "Deutsch", flag: "de" },

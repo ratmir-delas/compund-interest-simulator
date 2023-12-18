@@ -67,7 +67,19 @@ function changeLanguage(lang) {
 // Initialize with default language
 document.addEventListener('DOMContentLoaded', function() {
     generateLanguageOptions();
-    changeLanguage('pt'); // Initialize with default language
+    let language = 'pt-pt';
+    if (getCookie('userInfo')) {
+        //window.location.href = './simulator.html'; // Adjust the URL as needed
+        language = JSON.parse(getCookie('userInfo')).language;
+        changeLanguage(language);
+    } else if (getCookie('language')) {
+        language = getCookie('language');
+        changeLanguage(language);
+    } else {
+        changeLanguage(language); // Initialize with default language
+    }
+    //set select language value
+    document.getElementById('language').value = language;
 });
 
 
