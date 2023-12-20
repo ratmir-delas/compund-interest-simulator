@@ -1,5 +1,7 @@
-package com.prospero.simulator.User;
+package com.prospero.simulator.controllers;
 
+import com.prospero.simulator.User.User;
+import com.prospero.simulator.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

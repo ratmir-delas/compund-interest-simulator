@@ -9,7 +9,7 @@ document.getElementById('userForm').addEventListener('submit', function(e) {
         password: document.getElementById('password').value
     };
 
-    fetch('http://localhost:6969/api/v1/users/', {
+    fetch('/api/v1/users/', { //http://localhost:6969
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ document.getElementById('userForm').addEventListener('submit', function(e) {
             setCookie('userInfo', JSON.stringify(formData), 30); // Keeps the user logged in for set days
 
             // Redirect to index page on successful registration
-            window.location.href = './simulator.html'; // Adjust the URL as needed
+            window.location.href = '/simulator'; // Adjust the URL as needed
         })
         .then(response => {
             if (response.status === 200) {

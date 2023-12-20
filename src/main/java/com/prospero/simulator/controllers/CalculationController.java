@@ -1,5 +1,7 @@
-package com.prospero.simulator.Calculation;
+package com.prospero.simulator.controllers;
 
+import com.prospero.simulator.Calculation.Calculation;
+import com.prospero.simulator.Calculation.CalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
