@@ -1,6 +1,5 @@
-package com.prospero.simulator.Calculation;
+package com.prospero.simulator.entities;
 
-import com.prospero.simulator.User.User;
 import jakarta.persistence.*;
 
 import java.util.Objects;

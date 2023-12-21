@@ -1,5 +1,7 @@
-package com.prospero.simulator.Contact;
+package com.prospero.simulator.services;
 
+import com.prospero.simulator.repositories.ContactRepository;
+import com.prospero.simulator.entities.Contact;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

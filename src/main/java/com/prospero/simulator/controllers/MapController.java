@@ -21,4 +21,20 @@ public class MapController {
     public String simulatorPage() {
         return "simulator";
     }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";
+    }
+
+    @GetMapping("/updates")
+    public String updatesPage() {
+        return "updates";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage() {
+        return "contact";
+    }
+
 }

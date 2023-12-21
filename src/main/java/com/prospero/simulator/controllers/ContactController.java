@@ -1,7 +1,7 @@
 package com.prospero.simulator.controllers;
 
-import com.prospero.simulator.Contact.Contact;
-import com.prospero.simulator.Contact.ContactService;
+import com.prospero.simulator.entities.Contact;
+import com.prospero.simulator.services.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

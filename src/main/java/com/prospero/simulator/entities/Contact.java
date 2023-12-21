@@ -1,4 +1,4 @@
-package com.prospero.simulator.Contact;
+package com.prospero.simulator.entities;
 
 import jakarta.persistence.*;
 

@@ -1,5 +1,7 @@
-package com.prospero.simulator.Calculation;
+package com.prospero.simulator.services;
 
+import com.prospero.simulator.repositories.CalculationRepository;
+import com.prospero.simulator.entities.Calculation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

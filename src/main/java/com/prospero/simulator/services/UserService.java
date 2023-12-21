@@ -1,5 +1,7 @@
-package com.prospero.simulator.User;
+package com.prospero.simulator.services;
 
+import com.prospero.simulator.entities.User;
+import com.prospero.simulator.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
