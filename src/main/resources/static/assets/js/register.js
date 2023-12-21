@@ -9,7 +9,7 @@ document.getElementById('userForm').addEventListener('submit', function(e) {
         password: document.getElementById('password').value
     };
 
-    fetch('/api/v1/users/', { //http://localhost:6969
+    fetch('/api/v1/users/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
