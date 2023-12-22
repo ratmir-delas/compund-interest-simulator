@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <!-- Configurações básicas da cabeça do documento -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.5, user-scalable=yes">
-    <title>Juro Composto</title>
+    <title data-lang-key="title">Simulador Juro Composto</title>
     <link rel="icon" href="/assets/img/budget.png">
     <!-- Links para folhas de estilo externas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/simulator.css">
+    <link rel="stylesheet" href="/assets/css/simulator.css?v=1">
 </head>
 <body>
 
-    <h2 id="titulo-calculadora">Calculadóra de Juros Compostos</h2>
+    <h2 id="title-simulator" data-lang-key="title">Calculadóra de Juros Compostos</h2>
 
-    <div id="container-calculadora">
+    <div id="container-simulator">
         <!-- Seção de gráfico -->
-        <div id="container-grafico">
-            <div id="sub-container-grafico" class="text-center">
-                <div>Saldo Futuro</div>
+        <div id="container-graphic">
+            <div id="sub-container-graphic" class="text-center">
+                <div data-lang-key="futureBalance">Saldo Futuro</div>
                 <div class="h3" id="future_balance">?</div>
                 <canvas id="myChart"></canvas>
             </div>
             <div id="container-export">
-                <button id="btn-export-csv" class="btn btn-primary">&DownArrowBar; Exportar dados</button>
+                <button id="btn-export-csv" class="btn btn-primary" data-lang-key="exportData">&DownArrowBar; Exportar dados</button>
             </div>
         </div>
 
         <!-- Seção de formulário -->
-        <div id="container-formulario">
-            <div id="sub-container-formulario">
+        <div id="container-form">
+            <div id="sub-container-form">
                 <!-- Grupo de formulário para o depósito inicial -->
                 <div class="form-group mb-4">
-                    <label for="initial_deposit">Depósito Inicial</label>
+                    <label for="initial_deposit" data-lang-key="initialDeposit">Depósito Inicial</label>
                     <div class="">
                         <!-- Input com botões para aumentar ou diminuir o valor -->
                         <div class="input-group">
@@ -50,7 +50,7 @@
 
                 <!-- Grupo de formulário para as contribuições -->
                 <div class="form-group">
-                    <label for="contribution_amount">Contribuições</label>
+                    <label for="contribution_amount" data-lang-key="contributions">Contribuições</label>
                     <div class="">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -65,24 +65,24 @@
 
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" id="contribution_period_monthly" type="radio" name="contribution_period" value="12" checked>
-                        <label class="form-check-label" for="contribution_period_monthly">mensal</label>
+                        <label class="form-check-label" for="contribution_period_monthly" data-lang-key="monthly">mensal</label>
                     </div>
 
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" id="contribution_period_annually" type="radio" name="contribution_period" value="1">
-                        <label class="form-check-label" for="contribution_period_annually">anual</label>
+                        <label class="form-check-label" for="contribution_period_annually" data-lang-key="annual">anual</label>
                     </div>
                 </div>
 
                 <!-- Grupo de formulário para a duração do investimento -->
                 <div class="form-group">
-                    <label for="investment_timespan">Duração do Investimento</label>
+                    <label for="investment_timespan" data-lang-key="investmentDuration">Duração do Investimento</label>
                     <div class="">
                         <div class="">
                             <input class="form-control" id="investment_timespan" type="range" name="investment_timespan" min="2" max="50" step="1" value="5">
                         </div>
                     </div>
-                    <span id="investment_timespan_text">5 anos</span>
+                    <span id="investment_timespan_text">5</span> <span data-lang-key="years">anos</span>
                 </div>
 
                 <!-- Grupo de formulário para a taxa de retorno estimada -->
@@ -101,23 +101,55 @@
                     </div>
                 </div>
 
+                <!-- Grupo de formulário para a taxa de imposto estimada -->
+                <div class="form-group">
+                    <label for="estimated_tax" data-lang-key="estimatedTax">Taxa de Imposto Estimada</label>
+                    <div class="">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_tax">&minus;</button>
+                            </div>
+                            <input class="form-control text-center" id="estimated_tax" type="text" name="estimated_tax" min="0" max="50" step="0.25" value="5.00%" data-value="5.00" data-append="%">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_tax">&plus;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grupo de formulário para a taxa de inflação estimada -->
+                <div class="form-group">
+                    <label for="estimated_inflation" data-lang-key="estimatedInflation">Taxa de Inflação Estimada</label>
+                    <div class="">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_inflation">&minus;</button>
+                            </div>
+                            <input class="form-control text-center" id="estimated_inflation" type="text" name="estimated_inflation" min="0" max="50" step="0.25" value="5.00%" data-value="5.00" data-append="%">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_inflation">&plus;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Grupo de formulário para a frequência da capitalização -->
                 <div class="form-group">
                     <div class="">
-                        <label>Frequência da Capitalização</label> <br>
+                        <label data-lang-key="capitalizationFrequency">Frequência da Capitalização</label> <br>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" id="compound_period_daily" type="radio" name="compound_period" value="365">
-                            <label class="form-check-label" for="compound_period_daily">diário</label>
+                            <label class="form-check-label" data-lang-key="daily" for="compound_period_daily">diário</label>
                         </div>
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" id="compound_period_monthly" type="radio" name="compound_period" value="12" checked>
-                            <label class="form-check-label" for="compound_period_monthly">mensal</label>
+                            <label class="form-check-label" data-lang-key="monthly" for="compound_period_monthly">mensal</label>
                         </div>
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" id="compound_period_annually" type="radio" name="compound_period" value="1">
-                            <label class="form-check-label" for="compound_period_annually">anual</label>
+                            <label class="form-check-label" data-lang-key="annual" for="compound_period_annually">anual</label>
                         </div>
                     </div>
                 </div>
@@ -125,12 +157,12 @@
                 <!-- Grupo de formulário para limpar e reinciar -->
                 <div class="form-group">
                     <div class="input-group">
-                        <button id="button-reset" class="btn btn-primary btn-wide">&#x21bb; Reiniciar</button>
+                        <button id="button-reset" class="btn btn-primary btn-wide">&#x21bb; <span data-lang-key="resetButton">Reiniciar</span></button>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <button id="button-save" class="btn btn-primary btn-wide">&#128427; Guardar Cálculo</button>
+                        <button id="button-save" class="btn btn-primary btn-wide">&#128427; <span data-lang-key="saveCalculation">Guardar Cálculo</span></button>
                     </div>
                 </div>
             </div>
@@ -138,26 +170,28 @@
 
     </div>
 
-    <div id="container-historico" style="margin-top: 50px">
-        <div id="sub-container-historico">
-            <div id="historico">
-                <div id="historico-titulo">
-                    <h2>Histórico</h2>
+    <div id="container-history" style="margin-top: 50px">
+        <div id="sub-container-history">
+            <div id="history">
+                <div id="history-title">
+                    <h2 data-lang-key="history">Histórico</h2>
                 </div>
-                <div id="historico-conteudo">
-                    <div id="historico-conteudo-tabela">
+                <div id="history-content">
+                    <div id="history-content-table">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Duração</th>
-                                    <th scope="col">Saldo Inicial</th>
-                                    <th scope="col">Contribuições</th>
-                                    <th scope="col">Juros</th>
-                                    <th scope="col">Saldo Final</th>
-                                    <th scope="col">Ação</th>
+                                    <th scope="col" data-lang-key="investmentDuration">Duração</th>
+                                    <th scope="col" data-lang-key="initialDeposit">Depósito Inicial</th>
+                                    <th scope="col" data-lang-key="contribution">Contribuições</th>
+                                    <th scope="col" data-lang-key="interest">Juros</th>
+                                    <th scope="col" data-lang-key="estimatedTax">Impostos Estimados</th>
+                                    <th scope="col" data-lang-key="estimatedInflation">Inflção Estimada</th>
+                                    <th scope="col" data-lang-key="futureBalance">Saldo Final</th>
+                                    <th scope="col" data-lang-key="action">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody id="historico-conteudo-tabela-body">
+                            <tbody id="history-content-table-body">
 
                             </tbody>
                         </table>
@@ -167,9 +201,11 @@
         </div>
     </div>
 
-    <!-- Scripts externos -->
+    <!-- External scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/cookies.js"></script>
     <script src="/assets/js/simulator.js"></script>
+    <script src="/assets/js/internationalisation/pages-translation/simulator.js"></script>
+    <script src="/assets/js/internationalisation/change.js"></script>
 </body>
 </html>

@@ -1,5 +1,10 @@
 (function () {
 
+    import {translations} from "/internationalisation/pages-translation/simulator.js";
+
+    // Get the language from the HTML tag
+    var language = document.querySelector('html').getAttribute('lang');
+
     // Function to update the value of an input field
     var initial_deposit = document.querySelector('#initial_deposit'),
         contribution_amount = document.querySelector('#contribution_amount'),
@@ -62,7 +67,7 @@
             _estimatedTax = parseFloat(estimated_tax.dataset.value / 100)
         ;
 
-        var labels = [];
+        var labels = []
         for (var year = _current_year; year < _current_year + _investment_duration; year++) {
             labels.push(year);
         }
@@ -81,28 +86,58 @@
             data: []
         };
 
-        // Calculate the future balance for each year
-        for (var i = 1; i <= _investment_duration; i++) {
-            var principal = _initial_deposit + (_contribution_amount * _contribution_frequency * i),
+        // Tax
+        var tax_dataset = {
+            label: "Imposto",
+            backgroundColor: 'rgb(220, 53, 69)',
+            data: []
+        };
+
+        // Inflation
+        var inflation_dataset = {
+            label: "Inflação",
+            backgroundColor: 'rgb(255, 193, 7)',
+            data: []
+        };
+
+        // Calculate values for each dataset
+        for (let i = 1; i <= _investment_duration; i++) {
+            let principal = _initial_deposit + (_contribution_amount * _contribution_frequency * i),
                 interest = 0,
-                balance = principal;
+                balance = principal,
+                tax = 0,
+                inflation = 0;
 
             if (_estimated_return) {
-                var x = Math.pow(1 + _estimated_return / _capitalization_frequency, _capitalization_frequency * i),
-                    juro_composto = _initial_deposit * x,
-                    juro_contribuicao = _contribution_amount * (x - 1) / (_estimated_return / _contribution_frequency);
-                interest = (juro_composto + juro_contribuicao - principal).toFixed(0)
-                balance = (juro_composto + juro_contribuicao).toFixed(0);
+                // Compound interest calculation
+                const x = Math.pow(1 + _estimated_return / _capitalization_frequency, _capitalization_frequency * i);
+                const compound_interest = _initial_deposit * x;
+                const contribution_interest = _contribution_amount * (x - 1) / (_estimated_return / _contribution_frequency);
+
+                // Gross interest
+                const grossInterest = compound_interest + contribution_interest - principal;
+                tax = grossInterest * _estimatedTax; // Calculate tax on interest
+                inflation = principal * _estimatedInflation * i; // Calculate inflation on principal
+
+                // Adjust for tax and inflation
+                const netInterest = grossInterest - tax;
+                var adjustedPrincipal = principal - inflation;
+                var adjustedInterest = netInterest;
+
+                balance = adjustedPrincipal + adjustedInterest;
+                interest = adjustedInterest;
             }
 
-            future_balance.innerHTML = balance + '€';
-            principal_dataset.data.push(principal);
-            interest_dataset.data.push(interest);
+            future_balance.innerHTML = balance.toFixed(2) + '€';
+            principal_dataset.data.push(adjustedPrincipal.toFixed(2));
+            interest_dataset.data.push(adjustedInterest.toFixed(2));
+            tax_dataset.data.push(-(tax.toFixed(2))); // Add tax data
+            inflation_dataset.data.push(-(inflation.toFixed(2))); // Add inflation data
         }
 
         return {
             labels: labels,
-            datasets: [principal_dataset, interest_dataset]
+            datasets: [principal_dataset, interest_dataset, tax_dataset, inflation_dataset]
         }
     }
 
@@ -129,12 +164,12 @@
     });
 
     investment_timespan.addEventListener('change', function () {
-        investment_timespan_text.innerHTML = this.value + ' anos';
+        investment_timespan_text.innerHTML = this.value;
         updateChart();
     });
 
     investment_timespan.addEventListener('input', function () {
-        investment_timespan_text.innerHTML = this.value + ' anos';
+        investment_timespan_text.innerHTML = this.value;
     });
 
     var radios = document.querySelectorAll('[name="contribution_period"], [name="compound_period"]');
@@ -211,7 +246,7 @@
         document.getElementById('estimated_return').value = '5.00%';
         document.getElementById('investment_timespan').value = '5';
         document.getElementById('compound_period_monthly').checked = true;
-        investment_timespan_text.innerHTML = '5 anos';
+        investment_timespan_text.innerHTML = '5';
 
         updateChart(); // Atualiza o gráfico com os valores padrão
     }
@@ -274,7 +309,7 @@
     });
 
 
-    // Adiciona um event listener ao botão de salvar
+    // Save calculation to history
     document.getElementById('button-save').addEventListener('click', function() {
         var duration = document.getElementById('investment_timespan').value;
         var initialDeposit = document.getElementById('initial_deposit').value;
@@ -291,12 +326,12 @@
         var tableBody = document.getElementById('historico-conteudo-tabela-body');
         var newRow = tableBody.insertRow();
         newRow.innerHTML = `
-        <td>${duration} anos</td>
+        <td>${duration}</td>
         <td>${initialDeposit}</td>
         <td>${contribution}</td>
         <td>${returnRate}</td>
         <td>${finalBalance}</td>
-        <td><button class="delete-row-btn">Eliminar</button></td>`;
+        <td><button class="delete-row-btn" data-lang-key="delete">Eliminar</button></td>`;
 
         newRow.onclick = function() {
             document.getElementById('investment_timespan').value = duration;
@@ -318,8 +353,8 @@
 
     // Função para atualizar a visibilidade da seção de histórico
     function updateHistoryVisibility() {
-        var tableBody = document.getElementById('historico-conteudo-tabela-body');
-        var historyContainer = document.getElementById('container-historico');
+        var tableBody = document.getElementById('history-content-table-body');
+        var historyContainer = document.getElementById('container-history');
         if (tableBody.rows.length > 0) {
             historyContainer.style.display = 'block';
         } else {
@@ -328,9 +363,6 @@
     }
     // Initially hide the history section
     updateHistoryVisibility();
-
-
-    // Adiciona um event listener ao botão de limpar histórico
 
 
 
@@ -366,7 +398,7 @@
         var tableBody = document.getElementById('historico-conteudo-tabela-body');
         for (var i = 0; i < tableBody.rows.length; i++) {
             var row = tableBody.rows[i];
-            if (row.cells[0].innerText === duration + ' anos' &&
+            if (row.cells[0].innerText === duration &&
                 row.cells[1].innerText === initialDeposit &&
                 row.cells[2].innerText === contribution &&
                 row.cells[3].innerText === returnRate) {

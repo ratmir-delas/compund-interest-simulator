@@ -1,18 +1,7 @@
-// Set a cookie with language information
-function setLanguageCookie() {
-    setCookie('language', document.getElementById('language').value, 30);
-}
-
-// Function to get a language cookie
-function getLanguage() {
-    return getCookie('language');
-}
-
-
 // Handle language selection
 document.addEventListener('DOMContentLoaded', function() {
     generateLanguageOptions();
-    let language = 'pt-pt';
+    let language = 'pt';
     if (getCookie('userInfo')) {
         //window.location.href = './simulator.html'; // Adjust the URL as needed
         language = JSON.parse(getCookie('userInfo')).language;
@@ -38,7 +27,7 @@ function changeLanguage(lang) {
     const selectedOption = document.querySelector(`#language option[value="${lang}"]`);
     const flagCode = selectedOption.dataset.flag;
     const flagImg = document.createElement("img");
-    flagImg.src = `./../src/img/flags/4x3/${flagCode}.svg`;
+    flagImg.src = `/assets/img/flags/4x3/${flagCode}.svg`;
 
     const languageName = selectedOption.textContent;
     selectedOption.textContent = '';

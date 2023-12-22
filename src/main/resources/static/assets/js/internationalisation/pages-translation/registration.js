@@ -19,7 +19,7 @@ const translations = {
         "registerButton": "Registrar",
         "loginLink": "¿Ya tienes una cuenta? Inicia sesión aquí."
     },
-    "pt-pt": {
+    "pt": {
         "title": "Registar Utilizador",
         "heading": "Registo de Utilizador",
         "languageLabel": "Idioma:",
@@ -29,26 +29,16 @@ const translations = {
         "registerButton": "Registar",
         "loginLink": "Já tem uma conta? Inicie sessão aqui."
     },
-    "pt-br": {
-        "title": "Registrar Usuário",
-        "heading": "Cadastro de Usuário",
-        "languageLabel": "Idioma:",
-        "nameLabel": "Nome:",
-        "emailLabel": "Email:",
-        "passwordLabel": "Senha:",
-        "registerButton": "Registrar",
-        "loginLink": "Já tem uma conta? Inicie sessão aqui."
-    },
-    "ru": {
-        "title": "Зарегистрировать пользователя", // Russian
-        "heading": "Регистрация пользователя",
-        "languageLabel": "Язык:",
-        "nameLabel": "Имя:",
-        "emailLabel": "Email:",
-        "passwordLabel": "Пароль:",
-        "registerButton": "Зарегистрировать",
-        "loginLink": "Уже есть аккаунт? Войдите здесь."
-    },
+    // "pt-br": {
+    //     "title": "Registrar Usuário",
+    //     "heading": "Cadastro de Usuário",
+    //     "languageLabel": "Idioma:",
+    //     "nameLabel": "Nome:",
+    //     "emailLabel": "Email:",
+    //     "passwordLabel": "Senha:",
+    //     "registerButton": "Registrar",
+    //     "loginLink": "Já tem uma conta? Inicie sessão aqui."
+    // },
     "de": {
         "title": "Benutzer registrieren", // German
         "heading": "Benutzerregistrierung",
@@ -58,16 +48,6 @@ const translations = {
         "passwordLabel": "Passwort:",
         "registerButton": "Registrieren",
         "loginLink": "Haben Sie bereits ein Konto? Hier anmelden."
-    },
-    "kz": {
-        "title": "Пайдаланушыны тіркеу", // Kazakh
-        "heading": "Пайдаланушы тіркеу",
-        "languageLabel": "Тіл:",
-        "nameLabel": "Аты:",
-        "emailLabel": "Электронды пошта:",
-        "passwordLabel": "Құпия сөз:",
-        "registerButton": "Тіркеу",
-        "loginLink": "Ескі тіркелгіңіз бар ма? Мұнда кіру."
     },
     "fr": {
         "title": "Inscrire l'utilisateur", // French

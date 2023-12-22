@@ -1,17 +1,15 @@
 const languageData = {
-    "pt-pt": { name: "Português", flag: "pt" },
-    "pt-br": { name: "Português brasileiro", flag: "br" },
+    "pt": { name: "Português", flag: "pt" },
+    //"pt-br": { name: "Português brasileiro", flag: "br" },
     "en": { name: "English", flag: "gb" },
     "de": { name: "Deutsch", flag: "de" },
     "es": { name: "Español", flag: "es" },
-    "fr": { name: "Français", flag: "fr" },
-    "ru": { name: "Русский", flag: "ru" }
-    //"kz": { name: "Қазақша", flag: "kz" }
+    "fr": { name: "Français", flag: "fr" }
 
     // Add more languages as needed
-    //Bulgarian, Croatian, Czech, Danish, Dutch,
-    // English, Estonian, Finnish, French, German,
-    // Greek, Hungarian, Irish, Italian, Latvian,
-    // Lithuanian, Maltese, Polish, Portuguese,
-    // Romanian, Slovak, Slovenian, Spanish and Swedish
+    // Bulgarian, Croatian, Czech, Danish,
+    // Estonian, Finnish, Italian, Latvian,
+    // Greek, Hungarian, Irish, Dutch,
+    // Lithuanian, Maltese, Polish, Slovak
+    // Romanian, Slovenian and Swedish
 };
