@@ -243,7 +243,7 @@ function initializeInvestmentSimulator(translations) {
         document.getElementById('estimated_return').value = '5.00%';
         document.getElementById('investment_timespan').value = '5';
         document.getElementById('compound_period_monthly').checked = true;
-        investment_timespan_text.innerHTML = '5';
+        //investment_timespan_text.innerHTML = '5';
 
         updateChart(); // Atualiza o gráfico com os valores padrão
     }

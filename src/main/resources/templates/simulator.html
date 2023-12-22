@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt">
 <head>
-    <!-- Configurações básicas da cabeça do documento -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.5, user-scalable=yes">
-    <title data-lang-key="title">Simulador Juro Composto</title>
+    <title data-lang-key="title"></title>
     <link rel="icon" href="/assets/img/budget.png">
     <!-- Links para folhas de estilo externas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
@@ -13,18 +11,18 @@
 </head>
 <body>
 
-    <h2 id="title-simulator" data-lang-key="title">Calculadóra de Juros Compostos</h2>
+    <h2 id="title-simulator" data-lang-key="title"></h2>
 
     <div id="container-simulator">
         <!-- Seção de gráfico -->
         <div id="container-graphic">
             <div id="sub-container-graphic" class="text-center">
-                <div data-lang-key="futureBalance">Saldo Futuro</div>
+                <div data-lang-key="futureBalance"></div>
                 <div class="h3" id="future_balance">?</div>
                 <canvas id="myChart"></canvas>
             </div>
             <div id="container-export">
-                <button id="btn-export-csv" class="btn btn-primary" data-lang-key="exportData">&DownArrowBar; Exportar dados</button>
+                <button id="btn-export-csv" class="btn btn-primary">&DownArrowBar; <span data-lang-key="exportData"></span></button>
             </div>
         </div>
 
@@ -33,7 +31,7 @@
             <div id="sub-container-form">
                 <!-- Grupo de formulário para o depósito inicial -->
                 <div class="form-group mb-4">
-                    <label for="initial_deposit" data-lang-key="initialDeposit">Depósito Inicial</label>
+                    <label for="initial_deposit" data-lang-key="initialDeposit"></label>
                     <div class="">
                         <!-- Input com botões para aumentar ou diminuir o valor -->
                         <div class="input-group">
@@ -64,30 +62,31 @@
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" id="contribution_period_monthly" type="radio" name="contribution_period" value="12" checked>
-                        <label class="form-check-label" for="contribution_period_monthly" data-lang-key="monthly">mensal</label>
+                        <input class="form-check-input" id="contribution_period_annually" type="radio" name="contribution_period" value="1" checked>
+                        <label class="form-check-label" for="contribution_period_annually" data-lang-key="annual"></label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" id="contribution_period_annually" type="radio" name="contribution_period" value="1">
-                        <label class="form-check-label" for="contribution_period_annually" data-lang-key="annual">anual</label>
+                        <input class="form-check-input" id="contribution_period_monthly" type="radio" name="contribution_period" value="12">
+                        <label class="form-check-label" for="contribution_period_monthly" data-lang-key="monthly"></label>
                     </div>
+
                 </div>
 
                 <!-- Grupo de formulário para a duração do investimento -->
                 <div class="form-group">
-                    <label for="investment_timespan" data-lang-key="investmentDuration">Duração do Investimento</label>
+                    <label for="investment_timespan" data-lang-key="investmentDuration"></label>
                     <div class="">
                         <div class="">
                             <input class="form-control" id="investment_timespan" type="range" name="investment_timespan" min="2" max="50" step="1" value="5">
                         </div>
                     </div>
-                    <span id="investment_timespan_text">5</span> <span data-lang-key="years">anos</span>
+                    <span id="investment_timespan_text">5</span> <span data-lang-key="years"></span>
                 </div>
 
                 <!-- Group form for estimated return tax -->
                 <div class="form-group">
-                    <label for="estimated_return">Taxa de Retorno Estimada</label>
+                    <label for="estimated_return" data-lang-key="estimatedReturn"></label>
                     <div class="">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -103,7 +102,7 @@
 
                 <!-- Group form for estimated tax -->
                 <div class="form-group">
-                    <label for="estimated_tax" data-lang-key="estimatedTax">Taxa de Imposto Estimada</label>
+                    <label for="estimated_tax" data-lang-key="estimatedTax"></label>
                     <div class="">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -119,7 +118,7 @@
 
                 <!-- Group form for estimated inflation rate -->
                 <div class="form-group">
-                    <label for="estimated_inflation" data-lang-key="estimatedInflation">Taxa de Inflação Estimada</label>
+                    <label for="estimated_inflation" data-lang-key="estimatedInflation"></label>
                     <div class="">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -136,20 +135,20 @@
                 <!-- Grupo de formulário para a frequência da capitalização -->
                 <div class="form-group">
                     <div class="">
-                        <label data-lang-key="capitalizationFrequency">Frequência da Capitalização</label> <br>
+                        <label data-lang-key="capitalizationFrequency"></label> <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="compound_period_daily" type="radio" name="compound_period" value="365">
-                            <label class="form-check-label" data-lang-key="daily" for="compound_period_daily">diário</label>
+                            <input class="form-check-input" id="compound_period_annually" type="radio" name="compound_period" value="1">
+                            <label class="form-check-label" data-lang-key="annual" for="compound_period_annually"></label>
                         </div>
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" id="compound_period_monthly" type="radio" name="compound_period" value="12" checked>
-                            <label class="form-check-label" data-lang-key="monthly" for="compound_period_monthly">mensal</label>
+                            <label class="form-check-label" data-lang-key="monthly" for="compound_period_monthly"></label>
                         </div>
 
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="compound_period_annually" type="radio" name="compound_period" value="1">
-                            <label class="form-check-label" data-lang-key="annual" for="compound_period_annually">anual</label>
+                            <input class="form-check-input" id="compound_period_daily" type="radio" name="compound_period" value="365">
+                            <label class="form-check-label" data-lang-key="daily" for="compound_period_daily"></label>
                         </div>
                     </div>
                 </div>
@@ -157,12 +156,12 @@
                 <!-- Grupo de formulário para limpar e reinciar -->
                 <div class="form-group">
                     <div class="input-group">
-                        <button id="button-reset" class="btn btn-primary btn-wide">&#x21bb; <span data-lang-key="resetButton">Reiniciar</span></button>
+                        <button id="button-reset" class="btn btn-primary btn-wide">&#x21bb; <span data-lang-key="resetButton"></span></button>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <button id="button-save" class="btn btn-primary btn-wide">&#128427; <span data-lang-key="saveCalculation">Guardar Cálculo</span></button>
+                        <button id="button-save" class="btn btn-primary btn-wide">&#128427; <span data-lang-key="saveCalculation"></span></button>
                     </div>
                 </div>
             </div>
@@ -183,7 +182,7 @@
                                 <tr>
                                     <th scope="col" data-lang-key="investmentDuration">Duração</th>
                                     <th scope="col" data-lang-key="initialDeposit">Depósito Inicial</th>
-                                    <th scope="col" data-lang-key="contribution">Contribuições</th>
+                                    <th scope="col" data-lang-key="contributions">Contribuições</th>
                                     <th scope="col" data-lang-key="interest">Juros</th>
                                     <th scope="col" data-lang-key="estimatedTax">Impostos Estimados</th>
                                     <th scope="col" data-lang-key="estimatedInflation">Inflção Estimada</th>
