@@ -12,23 +12,26 @@ public class Contact {
     private Long contact_id;
     private String name;
     private String email;
+    private String phone;
     private String message;
     private long sentDateTime;
 
     public Contact() {
     }
 
-    public Contact(String name, String email, String message, long sentDateTime) {
+    public Contact(String name, String email, String phone, String message, long sentDateTime) {
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.message = message;
         this.sentDateTime = sentDateTime;
     }
 
-    public Contact(long contact_id, String name, String email, String message, long sentDateTime) {
+    public Contact(long contact_id, String name, String email, String phone, String message, long sentDateTime) {
         this.contact_id = contact_id;
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.message = message;
         this.sentDateTime = sentDateTime;
     }
@@ -57,6 +60,14 @@ public class Contact {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+    	this.phone = phone;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -78,12 +89,12 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return sentDateTime == contact.sentDateTime && Objects.equals(contact_id, contact.contact_id) && Objects.equals(name, contact.name) && Objects.equals(email, contact.email) && Objects.equals(message, contact.message);
+        return sentDateTime == contact.sentDateTime && Objects.equals(contact_id, contact.contact_id) && Objects.equals(name, contact.name) && Objects.equals(email, contact.email) && Objects.equals(phone, contact.phone) && Objects.equals(message, contact.message);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(contact_id, name, email, message, sentDateTime);
+        return Objects.hash(contact_id, name, email, phone, message, sentDateTime);
     }
 
     @Override
@@ -92,6 +103,7 @@ public class Contact {
                 "contact_id=" + contact_id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 ", message='" + message + '\'' +
                 ", sentDateTime=" + sentDateTime +
                 '}';
