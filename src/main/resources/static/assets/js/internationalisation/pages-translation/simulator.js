@@ -1,4 +1,4 @@
-export const translations = {
+const translations = {
     "pt": {
         "title": "Simulador de Juros Compostos",
         "initialDeposit": "Depósito Inicial",

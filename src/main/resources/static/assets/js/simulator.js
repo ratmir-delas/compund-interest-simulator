@@ -1,9 +1,7 @@
-(function () {
-
-    import {translations} from "/internationalisation/pages-translation/simulator.js";
+function initializeInvestmentSimulator(translations) {
 
     // Get the language from the HTML tag
-    var language = document.querySelector('html').getAttribute('lang');
+    //var language = document.querySelector('html').getAttribute('lang');
 
     // Function to update the value of an input field
     var initial_deposit = document.querySelector('#initial_deposit'),
@@ -24,35 +22,46 @@
             oldValue = element.dataset.value || element.defaultValue || 0,
             newValue = parseFloat(element.value.replace(/€/, ''));
 
-        // Verifica se o novo valor é um número
+        // Verifies if the newValue is a number, if not, reverts to oldValue
         if (isNaN(parseFloat(newValue))) {
             newValue = oldValue;
         } else {
-            if (action === 'add') {
-                newValue += step;
-            } else if (action === 'sub') {
-                newValue -= step;
+            // Check if the newValue is a number, if not, revert to oldValue
+            if (isNaN(newValue)) {
+                newValue = oldValue;
+            } else {
+                if (action === 'add') {
+                    newValue += step; // Increment and cap at max
+                } else if (action === 'sub') {
+                    newValue -= step; // Decrement and cap at min
+                }
+
+                if (newValue >= max) {
+                    alert(translations.maxValueReached);
+                    newValue = Math.max(Math.min(newValue, max), min);
+                }
             }
 
-            newValue = newValue < min ? min : newValue > max ? max : newValue;
-
-            // Verificação do valor máximo e acionamento do alerta
-            if (newValue >= max && element.id === 'initial_deposit') {
-                alert('Você alcançou o valor máximo!');
-            }
-            if (newValue >= max && element.id === 'contribution_amount') {
-                alert('Você alcançou o valor máximo!');
-            }
-            if (newValue >= max && element.id === 'estimated_return') {
-                alert('Você alcançou o valor máximo!');
-            }
+            //newValue = newValue < min ? min : newValue > max ? max : newValue;
         }
 
+        // Update element value
         element.dataset.value = newValue;
         element.value = (element.dataset.prepend || '') + newValue + (element.dataset.append || '');
 
         updateChart();
     }
+
+    // getChartData() explanation
+    /*
+    Inputs: It takes user inputs like initial deposit, estimated return, regular contributions, and rates of tax and inflation.
+
+    Data Preparation: It creates datasets for principal amount, cumulative interest, tax, and inflation effects, covering the investment duration.
+
+    Calculations: The function computes the yearly balance, accounting for compounded interest, regular contributions, tax deductions, and inflation.
+
+    Output: It returns an object with time labels (years) and datasets, used to plot a chart illustrating the investment's growth and impacts over time.
+    */
 
     // Returns chart data
     function getChartData() {
@@ -64,81 +73,55 @@
             _investment_duration = parseInt(investment_timespan.value),
             _current_year = (new Date()).getFullYear(),
             _estimatedInflation = parseFloat(estimated_inflation.dataset.value / 100),
-            _estimatedTax = parseFloat(estimated_tax.dataset.value / 100)
-        ;
+            _estimatedTax = parseFloat(estimated_tax.dataset.value / 100);
 
-        var labels = []
+        var labels = [];
+        for (var y = _current_year; y < _current_year + _investment_duration; y++) {
+            labels.push(y);
+        }
+
+        var principal_dataset = { label: 'Montante Principal', backgroundColor: 'rgb(0, 123, 255)', data: [] };
+        var interest_dataset = { label: "Juro", backgroundColor: 'rgb(23, 162, 184)', data: [] };
+        var tax_dataset = { label: "Imposto", backgroundColor: 'rgb(220, 53, 69)', data: [] };
+        var inflation_dataset = { label: "Inflação", backgroundColor: 'rgb(255, 193, 7)', data: [] };
+
+        var balance = _initial_deposit;
+        var cumulativeInterest = 0, cumulativeTax = 0, cumulativeInflation = 0;
+
+
+        // Annual statistics
         for (var year = _current_year; year < _current_year + _investment_duration; year++) {
-            labels.push(year);
-        }
-
-        // Initial deposit
-        var principal_dataset = {
-            label: 'Montante Principal',
-            backgroundColor: 'rgb(0, 123, 255)',
-            data: []
-        };
-
-        // Interest
-        var interest_dataset = {
-            label: "Juro",
-            backgroundColor: 'rgb(23, 162, 184)',
-            data: []
-        };
-
-        // Tax
-        var tax_dataset = {
-            label: "Imposto",
-            backgroundColor: 'rgb(220, 53, 69)',
-            data: []
-        };
-
-        // Inflation
-        var inflation_dataset = {
-            label: "Inflação",
-            backgroundColor: 'rgb(255, 193, 7)',
-            data: []
-        };
-
-        // Calculate values for each dataset
-        for (let i = 1; i <= _investment_duration; i++) {
-            let principal = _initial_deposit + (_contribution_amount * _contribution_frequency * i),
-                interest = 0,
-                balance = principal,
-                tax = 0,
-                inflation = 0;
-
-            if (_estimated_return) {
-                // Compound interest calculation
-                const x = Math.pow(1 + _estimated_return / _capitalization_frequency, _capitalization_frequency * i);
-                const compound_interest = _initial_deposit * x;
-                const contribution_interest = _contribution_amount * (x - 1) / (_estimated_return / _contribution_frequency);
-
-                // Gross interest
-                const grossInterest = compound_interest + contribution_interest - principal;
-                tax = grossInterest * _estimatedTax; // Calculate tax on interest
-                inflation = principal * _estimatedInflation * i; // Calculate inflation on principal
-
-                // Adjust for tax and inflation
-                const netInterest = grossInterest - tax;
-                var adjustedPrincipal = principal - inflation;
-                var adjustedInterest = netInterest;
-
-                balance = adjustedPrincipal + adjustedInterest;
-                interest = adjustedInterest;
+            var interest = 0;
+            for (var period = 0; period < _capitalization_frequency; period++) {
+                if (period % (_capitalization_frequency / _contribution_frequency) === 0) {
+                    balance += _contribution_amount;
+                }
+                interest += balance * _estimated_return / _capitalization_frequency;
             }
+            balance += interest;
+            cumulativeInterest += interest;
 
-            future_balance.innerHTML = balance.toFixed(2) + '€';
-            principal_dataset.data.push(adjustedPrincipal.toFixed(2));
-            interest_dataset.data.push(adjustedInterest.toFixed(2));
-            tax_dataset.data.push(-(tax.toFixed(2))); // Add tax data
-            inflation_dataset.data.push(-(inflation.toFixed(2))); // Add inflation data
+            var tax = interest * _estimatedTax;
+            var inflation = balance * _estimatedInflation;
+
+            balance -= tax;
+            balance -= inflation;
+
+            cumulativeTax += tax;
+            cumulativeInflation += inflation;
+
+            principal_dataset.data.push(balance.toFixed(2));
+            interest_dataset.data.push(cumulativeInterest.toFixed(2));
+            tax_dataset.data.push(-cumulativeTax.toFixed(2));
+            inflation_dataset.data.push(-cumulativeInflation.toFixed(2));
         }
+
+        future_balance.innerHTML = balance.toFixed(2) + '€';
 
         return {
             labels: labels,
             datasets: [principal_dataset, interest_dataset, tax_dataset, inflation_dataset]
-        }
+        };
     }
 
     // Atualiza o gráfico
@@ -148,26 +131,40 @@
         chart.data.labels = data.labels;
         chart.data.datasets[0].data = data.datasets[0].data;
         chart.data.datasets[1].data = data.datasets[1].data;
+        chart.data.datasets[2].data = data.datasets[2].data;
+        chart.data.datasets[3].data = data.datasets[3].data;
         chart.update();
     }
 
+    // Initial deposit
     initial_deposit.addEventListener('change', function () {
         updateValue(this);
     });
+    initial_deposit.addEventListener('input', function () {
+        updateValue(this);
+    });
 
+    // Contribution amount
     contribution_amount.addEventListener('change', function () {
         updateValue(this);
     });
-
-    estimated_return.addEventListener('change', function () {
+    contribution_amount.addEventListener('input', function () {
         updateValue(this);
     });
 
+    // Estimated return
+    estimated_return.addEventListener('change', function () {
+        updateValue(this);
+    });
+    estimated_return.addEventListener('input', function () {
+        updateValue(this);
+    });
+
+    // Estimated inflation
     investment_timespan.addEventListener('change', function () {
         investment_timespan_text.innerHTML = this.value;
         updateChart();
     });
-
     investment_timespan.addEventListener('input', function () {
         investment_timespan_text.innerHTML = this.value;
     });
@@ -269,7 +266,7 @@
         if (field.name === "estimated_return") {
             time = 300; // Velocidade mais lenta para 'estimated_return'
         } else if (field.name === "initial_deposit") {
-            time = 50; // Velocidade mais lenta para 'estimated_return'
+            time = 100; // Velocidade mais lenta para 'estimated_return'
         } else {
             time = 200; // Velocidade padrão para outros campos
         }
@@ -286,26 +283,15 @@
     // Adiciona eventos aos botões
     //var buttons = document.querySelectorAll('[data-counter]');
     buttons.forEach(function (button) {
-        button.addEventListener('mousedown', function () {
+        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
+
+        button.addEventListener(isTouchDevice ? 'touchstart' : 'mousedown', function () {
             var field = document.querySelector('[name="' + this.dataset.field + '"]');
             var action = this.dataset.counter;
             startIncrementing(field, action);
         });
-        button.addEventListener('touchstart', function () {
-            var field = document.querySelector('[name="' + this.dataset.field + '"]');
-            var action = this.dataset.counter;
-            startIncrementing(field, action);
-        });
-        button.addEventListener('touchend', function () {
-            var field = document.querySelector('[name="' + this.dataset.field + '"]');
-            var action = this.dataset.counter;
-            stopIncrementing(field, action);
-        });
 
-
-        // Para incrementar tanto no mouseup quanto ao sair do botão
-        button.addEventListener('mouseup', stopIncrementing);
-        button.addEventListener('mouseleave', stopIncrementing);
+        button.addEventListener(isTouchDevice ? 'touchend' : 'mouseup', stopIncrementing);
     });
 
 
@@ -323,7 +309,7 @@
             return;
         }
 
-        var tableBody = document.getElementById('historico-conteudo-tabela-body');
+        var tableBody = document.getElementById('history-content-table-body');
         var newRow = tableBody.insertRow();
         newRow.innerHTML = `
         <td>${duration}</td>
@@ -395,7 +381,7 @@
 
     // Check if a calculation with these values already exists in the history
     function isDuplicateCalculation(duration, initialDeposit, contribution, returnRate) {
-        var tableBody = document.getElementById('historico-conteudo-tabela-body');
+        var tableBody = document.getElementById('history-content-table-body');
         for (var i = 0; i < tableBody.rows.length; i++) {
             var row = tableBody.rows[i];
             if (row.cells[0].innerText === duration &&
@@ -421,4 +407,4 @@
     // Add this function to a button's click event
     document.getElementById('btn-export-csv').addEventListener('click', exportToCSV);
 
-})();
+}

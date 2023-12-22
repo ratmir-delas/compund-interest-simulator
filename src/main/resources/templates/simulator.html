@@ -85,7 +85,7 @@
                     <span id="investment_timespan_text">5</span> <span data-lang-key="years">anos</span>
                 </div>
 
-                <!-- Grupo de formulário para a taxa de retorno estimada -->
+                <!-- Group form for estimated return tax -->
                 <div class="form-group">
                     <label for="estimated_return">Taxa de Retorno Estimada</label>
                     <div class="">
@@ -93,7 +93,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_return">&minus;</button>
                             </div>
-                            <input class="form-control text-center" id="estimated_return" type="text" name="estimated_return" min="0" max="50" step="0.25" value="5.00%" data-value="5.00" data-append="%">
+                            <input class="form-control text-center" id="estimated_return" type="text" name="estimated_return" min="0" max="50" step="0.25" value="8.00%" data-value="8.00" data-append="%">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_return">&plus;</button>
                             </div>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                <!-- Grupo de formulário para a taxa de imposto estimada -->
+                <!-- Group form for estimated tax -->
                 <div class="form-group">
                     <label for="estimated_tax" data-lang-key="estimatedTax">Taxa de Imposto Estimada</label>
                     <div class="">
@@ -109,7 +109,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_tax">&minus;</button>
                             </div>
-                            <input class="form-control text-center" id="estimated_tax" type="text" name="estimated_tax" min="0" max="50" step="0.25" value="5.00%" data-value="5.00" data-append="%">
+                            <input class="form-control text-center" id="estimated_tax" type="text" name="estimated_tax" min="0" max="50" step="0.25" value="20.00%" data-value="20.00" data-append="%">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_tax">&plus;</button>
                             </div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <!-- Grupo de formulário para a taxa de inflação estimada -->
+                <!-- Group form for estimated inflation rate -->
                 <div class="form-group">
                     <label for="estimated_inflation" data-lang-key="estimatedInflation">Taxa de Inflação Estimada</label>
                     <div class="">
@@ -125,7 +125,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_inflation">&minus;</button>
                             </div>
-                            <input class="form-control text-center" id="estimated_inflation" type="text" name="estimated_inflation" min="0" max="50" step="0.25" value="5.00%" data-value="5.00" data-append="%">
+                            <input class="form-control text-center" id="estimated_inflation" type="text" name="estimated_inflation" min="0" max="50" step="0.25" value="6.00%" data-value="6.00" data-append="%">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_inflation">&plus;</button>
                             </div>
@@ -206,6 +206,15 @@
     <script src="/assets/js/cookies.js"></script>
     <script src="/assets/js/simulator.js"></script>
     <script src="/assets/js/internationalisation/pages-translation/simulator.js"></script>
+    <script>
+        let language = "pt";
+        if (getCookie("userInfo") !== "") {
+            language = JSON.parse(getCookie("userInfo")).language;
+        } else if (getCookie("language") !== "") {
+            language = getCookie("language");
+        }
+        initializeInvestmentSimulator(translations[language]);
+    </script>
     <script src="/assets/js/internationalisation/change.js"></script>
 </body>
 </html>
