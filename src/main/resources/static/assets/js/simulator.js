@@ -1,13 +1,17 @@
 (function () {
-    // Variáveis para armazenar os elementos do DOM
+
+    // Function to update the value of an input field
     var initial_deposit = document.querySelector('#initial_deposit'),
         contribution_amount = document.querySelector('#contribution_amount'),
         investment_timespan = document.querySelector('#investment_timespan'),
         investment_timespan_text = document.querySelector('#investment_timespan_text'),
         estimated_return = document.querySelector('#estimated_return'),
-        future_balance = document.querySelector('#future_balance');
+        future_balance = document.querySelector('#future_balance'),
+        estimated_inflation = document.querySelector('#estimated_inflation'),
+        estimated_tax = document.querySelector('#estimated_tax')
+    ;
 
-    // Atualiza o valor do campo de entrada
+    // Refresh the chart when the inflation or tax rate changes
     function updateValue(element, action) {
         var min = parseFloat(element.getAttribute('min')),
             max = parseFloat(element.getAttribute('max')),
@@ -45,46 +49,48 @@
         updateChart();
     }
 
-    // Retorna os dados do gráfico
+    // Returns chart data
     function getChartData() {
-        var P = parseFloat(initial_deposit.dataset.value), // Principal
-            r = parseFloat(estimated_return.dataset.value / 100), // Taxa de Juro Anual
-            c = parseFloat(contribution_amount.dataset.value), // Montante de Contribuição
-            n = parseInt(document.querySelector('[name="compound_period"]:checked').value), // Período de Capitalização
-            n2 = parseInt(document.querySelector('[name="contribution_period"]:checked').value), // Período de Contribuição
-            t = parseInt(investment_timespan.value), // Duração do Investimento
-            currentYear = (new Date()).getFullYear()
+        var _initial_deposit = parseFloat(initial_deposit.dataset.value),
+            _estimated_return = parseFloat(estimated_return.dataset.value / 100),
+            _contribution_amount = parseFloat(contribution_amount.dataset.value),
+            _capitalization_frequency = parseInt(document.querySelector('[name="compound_period"]:checked').value),
+            _contribution_frequency = parseInt(document.querySelector('[name="contribution_period"]:checked').value),
+            _investment_duration = parseInt(investment_timespan.value),
+            _current_year = (new Date()).getFullYear(),
+            _estimatedInflation = parseFloat(estimated_inflation.dataset.value / 100),
+            _estimatedTax = parseFloat(estimated_tax.dataset.value / 100)
         ;
 
         var labels = [];
-        for (var year = currentYear; year < currentYear + t; year++) {
+        for (var year = _current_year; year < _current_year + _investment_duration; year++) {
             labels.push(year);
         }
 
-        // Montante Principal Total
+        // Initial deposit
         var principal_dataset = {
             label: 'Montante Principal',
             backgroundColor: 'rgb(0, 123, 255)',
             data: []
         };
 
-        // Juro Total
+        // Interest
         var interest_dataset = {
             label: "Juro",
             backgroundColor: 'rgb(23, 162, 184)',
             data: []
         };
 
-        // Calcula o montante principal e o juro para cada ano
-        for (var i = 1; i <= t; i++) {
-            var principal = P + (c * n2 * i),
+        // Calculate the future balance for each year
+        for (var i = 1; i <= _investment_duration; i++) {
+            var principal = _initial_deposit + (_contribution_amount * _contribution_frequency * i),
                 interest = 0,
                 balance = principal;
 
-            if (r) {
-                var x = Math.pow(1 + r / n, n * i),
-                    juro_composto = P * x,
-                    juro_contribuicao = c * (x - 1) / (r / n2);
+            if (_estimated_return) {
+                var x = Math.pow(1 + _estimated_return / _capitalization_frequency, _capitalization_frequency * i),
+                    juro_composto = _initial_deposit * x,
+                    juro_contribuicao = _contribution_amount * (x - 1) / (_estimated_return / _contribution_frequency);
                 interest = (juro_composto + juro_contribuicao - principal).toFixed(0)
                 balance = (juro_composto + juro_contribuicao).toFixed(0);
             }

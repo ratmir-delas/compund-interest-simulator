@@ -14,7 +14,8 @@ const translations = {
         "exportData": "Exportar dados",
         "futureBalance": "Saldo Futuro",
         "principalAmount": "Montante Principal",
-        "interest": "Juro"
+        "interest": "Juro",
+        "maxValueReached": "Valor máximo atingido"
     },
     "pt-br": {
         "title": "Calculadora de Juros Compostos",
@@ -31,7 +32,8 @@ const translations = {
         "exportData": "Exportar Dados",
         "futureBalance": "Saldo Futuro",
         "principalAmount": "Montante Principal",
-        "interest": "Juro"
+        "interest": "Juro",
+        "maxValueReached": "Valor máximo atingido"
     },
     "en": {
         "title": "Compound Interest Calculator",
@@ -48,7 +50,8 @@ const translations = {
         "exportData": "Export Data",
         "futureBalance": "Future Balance",
         "principalAmount": "Principal Amount",
-        "interest": "Interest"
+        "interest": "Interest",
+        "maxValueReached": "Maximum value reached"
     },
     "de": {
         "title": "Zinseszinsrechner",
@@ -65,7 +68,8 @@ const translations = {
         "exportData": "Daten exportieren",
         "futureBalance": "Zukünftiger Saldo",
         "principalAmount": "Hauptbetrag",
-        "interest": "Zinsen"
+        "interest": "Zinsen",
+        "maxValueReached": "Maximalwert erreicht"
     },
     "es": {
         "title": "Calculadora de Interés Compuesto",
@@ -82,7 +86,8 @@ const translations = {
         "exportData": "Exportar datos",
         "futureBalance": "Saldo Futuro",
         "principalAmount": "Monto Principal",
-        "interest": "Interés"
+        "interest": "Interés",
+        "maxValueReached": "Valor máximo alcanzado"
     },
     "fr": {
         "title": "Calculateur d'Intérêt Composé",
@@ -99,7 +104,8 @@ const translations = {
         "exportData": "Exporter les Données",
         "futureBalance": "Solde Futur",
         "principalAmount": "Montant Principal",
-        "interest": "Intérêt"
+        "interest": "Intérêt",
+        "maxValueReached": "Valeur maximale atteinte"
     },
     "ru": {
         "title": "Калькулятор сложных процентов",
@@ -116,7 +122,8 @@ const translations = {
         "exportData": "Экспорт данных",
         "futureBalance": "Будущий баланс",
         "principalAmount": "Основная сумма",
-        "interest": "Проценты"
+        "interest": "Проценты",
+        "maxValueReached": "Достигнуто максимальное значение"
     },
     "kz": {
         "title": "Күрделі пайыздар калькуляторы",
@@ -133,7 +140,8 @@ const translations = {
         "exportData": "Деректерді экспорттау",
         "futureBalance": "Келесі баланс",
         "principalAmount": "Бастапқы сомма",
-        "interest": "Пайыздар"
+        "interest": "Пайыздар",
+        "maxValueReached": "Ең көп мәнге жетті"
     }
     // ... add other languages as needed
 };

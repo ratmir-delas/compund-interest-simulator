@@ -5,8 +5,8 @@ const languageData = {
     "de": { name: "Deutsch", flag: "de" },
     "es": { name: "Español", flag: "es" },
     "fr": { name: "Français", flag: "fr" },
-    "ru": { name: "Русский", flag: "ru" },
-    "kz": { name: "Қазақша", flag: "kz" }
+    "ru": { name: "Русский", flag: "ru" }
+    //"kz": { name: "Қазақша", flag: "kz" }
 
     // Add more languages as needed
     //Bulgarian, Croatian, Czech, Danish, Dutch,
