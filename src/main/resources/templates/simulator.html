@@ -83,7 +83,7 @@
                     <span id="investment_timespan_text">5</span> <span data-lang-key="years"></span>
                 </div>
 
-                <!-- Group form for estimated return tax -->
+                <!-- Group form for estimated return -->
                 <div class="form-group">
                     <label for="estimated_return" data-lang-key="estimatedReturn"></label>
                     <!-- Input with add and sub buttons -->
@@ -177,14 +177,14 @@
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" data-lang-key="investmentDuration">Duração</th>
-                                    <th scope="col" data-lang-key="initialDeposit">Depósito Inicial</th>
-                                    <th scope="col" data-lang-key="contributions">Contribuições</th>
-                                    <th scope="col" data-lang-key="interest">Juros</th>
-                                    <th scope="col" data-lang-key="estimatedTax">Impostos Estimados</th>
-                                    <th scope="col" data-lang-key="estimatedInflation">Inflção Estimada</th>
-                                    <th scope="col" data-lang-key="futureBalance">Saldo Final</th>
-                                    <th scope="col" data-lang-key="action">Ação</th>
+                                    <th scope="col" data-lang-key="investmentDuration"></th>
+                                    <th scope="col" data-lang-key="initialDeposit"></th>
+                                    <th scope="col" data-lang-key="contributions" class="history-additional-info"></th>
+                                    <th scope="col" data-lang-key="interest" class="history-additional-info"></th>
+                                    <th scope="col" data-lang-key="estimatedTax" class="history-additional-info"></th>
+                                    <th scope="col" data-lang-key="estimatedInflation" class="history-additional-info"></th>
+                                    <th scope="col" data-lang-key="futureBalance"></th>
+                                    <th scope="col" data-lang-key="action"></th>
                                 </tr>
                             </thead>
                             <tbody id="history-content-table-body">
@@ -201,7 +201,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/cookies.js"></script>
     <script src="/assets/js/simulator.js?v=1"></script>
-    <script src="/assets/js/internationalisation/pages-translation/simulator.js?v=1"></script>
+    <script src="/assets/js/internationalisation/pages-translation/simulator.js?v=2"></script>
     <script>
         let language = "pt";
         if (getCookie("userInfo") !== "") {

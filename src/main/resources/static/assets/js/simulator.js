@@ -333,50 +333,61 @@ function initializeInvestmentSimulator(translations) {
 
     // Save calculation to history
     document.getElementById('button-save').addEventListener('click', function() {
-        var duration = document.getElementById('investment_timespan').value;
-        var initialDeposit = document.getElementById('initial_deposit').value;
-        var contribution = document.getElementById('contribution_amount').value;
-        var returnRate = document.getElementById('estimated_return').value;
-        var inflationRate = document.getElementById('estimated_return').value;
-        var taxRate = document.getElementById('estimated_return').value;
-        var futureBalance = document.getElementById('future_balance').textContent;
+        //ask for calculation name
+        var calculationName = prompt(translations.enterCalculationName);
+        if (calculationName) {
+            const duration = document.getElementById('investment_timespan').value;
+            const initialDeposit = document.getElementById('initial_deposit').value;
+            const contribution = document.getElementById('contribution_amount').value;
+            const returnRate = document.getElementById('estimated_return').value;
+            const inflationRate = document.getElementById('estimated_inflation').value;
+            const taxRate = document.getElementById('estimated_tax').value;
+            const futureBalance = document.getElementById('future_balance').textContent;
 
-        // Check for duplicate calculations
-        if (isDuplicateCalculation(duration, initialDeposit, contribution, returnRate, inflationRate, taxRate, futureBalance)) {
-            alert(translations.alreadyExists);
-            return;
-        }
+            // Retrieve the selected values for frequencies
+            const contributionFrequency = document.querySelector('[name="contribution_period"]:checked').value;
+            const capitalizationFrequency = document.querySelector('[name="compound_period"]:checked').value;
 
-        var tableBody = document.getElementById('history-content-table-body');
-        var newRow = tableBody.insertRow();
-        newRow.innerHTML = `
-        <td>${duration}</td>
-        <td>${initialDeposit}</td>
-        <td>${contribution}</td>
-        <td>${returnRate}</td>
-        <td>${inflationRate}</td>
-        <td>${taxRate}</td>
-        <td>${futureBalance}</td>
-        <td><button class="delete-row-btn" data-lang-key="delete">Eliminar</button></td>`;
+            // Check for duplicate calculations
+            if (isDuplicateCalculation(duration, initialDeposit, contribution, returnRate, taxRate, inflationRate, futureBalance)) {
+                alert(translations.alreadyExists);
+                return;
+            }
 
-        newRow.onclick = function() {
-            document.getElementById('investment_timespan').value = duration;
-            document.getElementById('initial_deposit').value = initialDeposit;
-            document.getElementById('estimated_tax').value = initialDeposit;
-            document.getElementById('estimated_inflation').value = initialDeposit;
-            document.getElementById('contribution_amount').value = contribution;
-            document.getElementById('estimated_return').value = returnRate;
-            updateChart();
-        }
+            const tableBody = document.getElementById('history-content-table-body');
+            const newRow = tableBody.insertRow();
+            newRow.innerHTML = `
+                <td>${duration} ${translations.years}</td>
+                <td>${initialDeposit}</td>
+                <td class="history-additional-info">${contribution}</td>
+                <td class="history-additional-info">${returnRate}</td>
+                <td class="history-additional-info">${taxRate}</td>
+                <td class="history-additional-info">${inflationRate}</td>
+                <td>${futureBalance}</td>
+                <td><button class="delete-row-btn" data-lang-key="delete">${translations.delete}</button></td>`;
 
-        newRow.querySelector('.delete-row-btn').onclick = function(e) {
-            e.stopPropagation();
-            tableBody.removeChild(this.parentElement.parentElement);
+            newRow.onclick = function() {
+                document.getElementById('initial_deposit').value = initialDeposit;
+                document.getElementById('contribution_amount').value = contribution;
+                document.getElementById('investment_timespan').value = duration;
+                document.getElementById('estimated_return').value = estimated_return;
+                document.getElementById('estimated_tax').value = estimated_tax;
+                document.getElementById('estimated_return').value = returnRate;
+                document.getElementById('estimated_inflation').value = estimated_inflation;
+                updateChart();
+            }
+
+            newRow.querySelector('.delete-row-btn').onclick = function(e) {
+                e.stopPropagation();
+                tableBody.removeChild(this.parentElement.parentElement);
+                updateHistoryVisibility();
+            }
+
             updateHistoryVisibility();
+            updateChart();
+        } else {
+            alert(translations.calculationNameRequired);
         }
-
-        updateHistoryVisibility();
-        updateChart();
     });
 
     // Função para atualizar a visibilidade da seção de histórico
@@ -397,22 +408,22 @@ function initializeInvestmentSimulator(translations) {
     // Função para exportar o histórico para CSV
     function exportToCSV() {
         // Gather input data
-        var inputData = getInputData();
+        const inputData = getInputData();
 
         // Gather chart data using your getChartData function
-        var chartData = getChartData();
-        var csvContent = "data:text/csv;charset=utf-8," + inputData;
+        const chartData = getChartData();
+        let csvContent = "data:text/csv;charset=utf-8," + inputData;
         csvContent += "Year,Principal,Interest\r\n";
 
         chartData.labels.forEach(function(label, index){
-            var principal = chartData.datasets[0].data[index]; // Assuming 0 is principal
-            var interest = chartData.datasets[1].data[index];  // Assuming 1 is interest
+            const principal = chartData.datasets[0].data[index]; // Assuming 0 is principal
+            const interest = chartData.datasets[1].data[index];  // Assuming 1 is interest
             csvContent += label + "," + principal + "," + interest + "\r\n";
         });
 
         // Trigger CSV download
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", "compound_interest_data.csv");
         document.body.appendChild(link); // Required for FF
@@ -422,14 +433,19 @@ function initializeInvestmentSimulator(translations) {
     }
 
     // Check if a calculation with these values already exists in the history
-    function isDuplicateCalculation(duration, initialDeposit, contribution, returnRate) {
+    function isDuplicateCalculation(duration, initialDeposit, contribution, returnRate, taxRate, inflationRate, futureBalance) {
         var tableBody = document.getElementById('history-content-table-body');
-        for (var i = 0; i < tableBody.rows.length; i++) {
-            var row = tableBody.rows[i];
-            if (row.cells[0].innerText === duration &&
-                row.cells[1].innerText === initialDeposit &&
-                row.cells[2].innerText === contribution &&
-                row.cells[3].innerText === returnRate) {
+        for (let i = 0; i < tableBody.rows.length; i++) {
+            const row = tableBody.rows[i];
+            const rowDuration = row.cells[0].textContent;
+            const rowInitialDeposit = row.cells[1].textContent;
+            const rowContribution = row.cells[2].textContent;
+            const rowReturnRate = row.cells[3].textContent;
+            const rowTaxRate = row.cells[4].textContent;
+            const rowInflationRate = row.cells[5].textContent;
+            const rowFutureBalance = row.cells[6].textContent;
+
+            if (rowDuration === duration && rowInitialDeposit === initialDeposit && rowContribution === contribution && rowReturnRate === returnRate && rowTaxRate === taxRate && rowInflationRate === inflationRate && rowFutureBalance === futureBalance) {
                 return true;
             }
         }
@@ -438,12 +454,18 @@ function initializeInvestmentSimulator(translations) {
 
     // Get input field data
     function getInputData() {
-        var initialDeposit = document.getElementById('initial_deposit').value;
-        var contribution = document.getElementById('contribution_amount').value;
-        var returnRate = document.getElementById('estimated_return').value;
-        var duration = document.getElementById('investment_timespan').value;
+        const initialDeposit = document.getElementById('initial_deposit').value;
+        const contribution = document.getElementById('contribution_amount').value;
+        const contributionFrequency = document.querySelector('[name="contribution_period"]:checked').value;
+        const duration = document.getElementById('investment_timespan').value;
+        const returnRate = document.getElementById('estimated_return').value;
+        const capitalizationFrequency = document.querySelector('[name="compound_period"]:checked').value;
+        const estimatedTax = document.getElementById('estimated_tax').value;
+        const estimatedInflation = document.getElementById('estimated_inflation').value;
 
-        return `Initial Deposit,${initialDeposit}\r\nContributions,${contribution}\r\nReturn Rate,${returnRate}\r\nDuration,${duration}\r\n\r\n`;
+        var inputData = "Initial Deposit,Contribution,Contribution Frequency,Duration,Return Rate,Capitalization Frequency,Estimated Tax,Estimated Inflation\r\n";
+        inputData += initialDeposit + "," + contribution + "," + contributionFrequency + "," + duration + "," + returnRate + "," + capitalizationFrequency + "," + estimatedTax + "," + estimatedInflation + "\r\n";
+        return inputData;
     }
 
     // Add this function to a button's click event

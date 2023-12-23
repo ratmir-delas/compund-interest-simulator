@@ -6,6 +6,7 @@ const translations = {
         "monthly": "mensal",
         "annual": "anual",
         "investmentDuration": "Duração do Investimento",
+        "duration": "Duração",
         "estimatedReturn": "Taxa de Retorno Estimada",
         "capitalizationFrequency": "Frequência da Capitalização",
         "daily": "diário",
@@ -27,6 +28,8 @@ const translations = {
         "history": "Histórico",
         "delete": "Apagar",
         "alreadyExists": "Um cálculo com estes valores já existe no histórico!",
+        "enterCalculationName": "Insira o nome do cálculo",
+        "calculationNameRequired": "O nome do cálculo é obrigatório para salvar",
     },
     "pt-br": {
         "title": "Simulador de Juros Compostos",
@@ -35,6 +38,7 @@ const translations = {
         "monthly": "mensal",
         "annual": "anual",
         "investmentDuration": "Duração do Investimento",
+        "duration": "Duração",
         "estimatedReturn": "Taxa de Retorno Estimada",
         "capitalizationFrequency": "Frequência da Capitalização",
         "daily": "diário",
@@ -56,6 +60,9 @@ const translations = {
         "history": "Histórico",
         "delete": "Apagar",
         "alreadyExists": "Um cálculo com estes valores já existe no histórico!",
+        "enterCalculationName": "Insira o nome do cálculo",
+        "calculationNameRequired": "O nome do cálculo é obrigatório para salvar",
+
     },
     "en": {
         "title": "Compound Interest Simulator",
@@ -64,6 +71,7 @@ const translations = {
         "monthly": "monthly",
         "annual": "annual",
         "investmentDuration": "Investment Duration",
+        "duration": "Duration",
         "estimatedReturn": "Estimated Return Rate",
         "capitalizationFrequency": "Capitalization Frequency",
         "daily": "daily",
@@ -85,6 +93,8 @@ const translations = {
         "history": "History",
         "delete": "Delete",
         "alreadyExists": "A calculation with these values already exists in the history!",
+        "enterCalculationName": "Enter the calculation name",
+        "calculationNameRequired": "Calculation name is required to save",
     },
     "de": {
         "title": "Zinseszinsrechner",
@@ -93,6 +103,7 @@ const translations = {
         "monthly": "monatlich",
         "annual": "jährlich",
         "investmentDuration": "Anlagezeitraum",
+        "duration": "Dauer",
         "estimatedReturn": "Geschätzte Rendite",
         "capitalizationFrequency": "Kapitalisierungshäufigkeit",
         "daily": "täglich",
@@ -114,6 +125,8 @@ const translations = {
         "history": "Geschichte",
         "delete": "Löschen",
         "alreadyExists": "Eine Berechnung mit diesen Werten existiert bereits in der Historie!",
+        "enterCalculationName": "Geben Sie den Berechnungsnamen ein",
+        "calculationNameRequired": "Berechnungsname ist erforderlich, um zu speichern",
     },
     "es": {
         "title": "Simulador de Interés Compuesto",
@@ -122,6 +135,7 @@ const translations = {
         "monthly": "mensual",
         "annual": "anual",
         "investmentDuration": "Duración de la Inversión",
+        "duration": "Duración",
         "estimatedReturn": "Tasa de Rendimiento Estimada",
         "capitalizationFrequency": "Frecuencia de Capitalización",
         "daily": "diario",
@@ -143,6 +157,8 @@ const translations = {
         "history": "Historia",
         "delete": "Borrar",
         "alreadyExists": "¡Un cálculo con estos valores ya existe en el historial!",
+        "enterCalculationName": "Ingrese el nombre del cálculo",
+        "calculationNameRequired": "El nombre del cálculo es obligatorio para guardar",
     },
     "fr": {
         "title": "Simulateur d'Intérêt Composé",
@@ -151,6 +167,7 @@ const translations = {
         "monthly": "mensuel",
         "annual": "annuel",
         "investmentDuration": "Durée de l'Investissement",
+        "duration": "Durée",
         "estimatedReturn": "Taux de Rendement Estimé",
         "capitalizationFrequency": "Fréquence de Capitalisation",
         "daily": "quotidien",
@@ -172,6 +189,8 @@ const translations = {
         "history": "Histoire",
         "delete": "Supprimer",
         "alreadyExists": "Un calcul avec ces valeurs existe déjà dans l'historique!",
+        "enterCalculationName": "Entrez le nom du calcul",
+        "calculationNameRequired": "Le nom du calcul est obligatoire pour enregistrer",
     }
-    // ... add other languages as needed
+    // ... other languages
 };

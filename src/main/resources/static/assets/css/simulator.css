@@ -41,7 +41,8 @@ label {
     float: right;
 }
 
-/* Responsividade */
+
+/*////////// Responsiveness /////////////////*/
 /* Laptop */
 @media screen and (min-device-width: 1024px){
     #container-simulator {
@@ -102,7 +103,7 @@ label {
     }
 }
 
-/* Telefones em modo paisagem */
+/* Smartphones in landscape mode */
 @media screen and (max-device-width: 640px) {
     #container-form {
         width: 100%;
@@ -132,7 +133,7 @@ label {
     }
 }
 
-/* Telefones em modo retrato */
+/* Smartphones in portrait mode */
 @media screen and (max-device-width: 480px) {
     #container-form {
         width: 100%;
@@ -158,5 +159,9 @@ label {
 
     .container-export {
         width: 100%;
+    }
+
+    .history-additional-info {
+        display: none;
     }
 }
