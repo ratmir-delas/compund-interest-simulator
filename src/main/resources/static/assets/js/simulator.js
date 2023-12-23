@@ -4,7 +4,7 @@ function initializeInvestmentSimulator(translations) {
     //var language = document.querySelector('html').getAttribute('lang');
 
     // Function to update the value of an input field
-    var initial_deposit = document.querySelector('#initial_deposit'),
+    const initial_deposit = document.querySelector('#initial_deposit'),
         contribution_amount = document.querySelector('#contribution_amount'),
         investment_timespan = document.querySelector('#investment_timespan'),
         investment_timespan_text = document.querySelector('#investment_timespan_text'),
@@ -53,7 +53,6 @@ function initializeInvestmentSimulator(translations) {
         var balance = _initial_deposit;
         var cumulativeInterest = 0, cumulativeTax = 0, cumulativeInflation = 0;
 
-
         // Annual statistics
         for (var year = _current_year; year < _current_year + _investment_duration; year++) {
             var interest = 0;
@@ -63,25 +62,22 @@ function initializeInvestmentSimulator(translations) {
                 }
                 interest += balance * _estimated_return / _capitalization_frequency;
             }
-            balance += interest;
-            cumulativeInterest += interest;
 
             var tax = interest * _estimatedTax;
             var inflation = balance * _estimatedInflation;
 
-            balance -= tax;
-            balance -= inflation;
-
+            cumulativeInterest += interest;
             cumulativeTax += tax;
             cumulativeInflation += inflation;
 
-            principal_dataset.data.push(balance.toFixed(2));
+            // Update the datasets
+            principal_dataset.data.push((balance + cumulativeInterest).toFixed(2));
             interest_dataset.data.push(cumulativeInterest.toFixed(2));
             tax_dataset.data.push(-cumulativeTax.toFixed(2));
             inflation_dataset.data.push(-cumulativeInflation.toFixed(2));
         }
 
-        future_balance.innerHTML = balance.toFixed(2) + '€';
+        future_balance.innerHTML = (balance + cumulativeInterest - cumulativeTax - cumulativeInflation).toFixed(2) + '€';
 
         return {
             labels: labels,
@@ -204,6 +200,15 @@ function initializeInvestmentSimulator(translations) {
         updateValue(this);
     });
 
+    // Investment timespan
+    investment_timespan.addEventListener('change', function () {
+        investment_timespan_text.innerHTML = this.value;
+        updateChart();
+    });
+    investment_timespan.addEventListener('input', function () {
+        investment_timespan_text.innerHTML = this.value;
+    });
+
     // Estimated return
     estimated_return.addEventListener('change', function () {
         updateValue(this);
@@ -212,14 +217,23 @@ function initializeInvestmentSimulator(translations) {
         updateValue(this);
     });
 
+    // Estimated tax
+    estimated_tax.addEventListener('change', function () {
+        updateValue(this);
+    });
+    estimated_tax.addEventListener('input', function () {
+        updateValue(this);
+    });
+
     // Estimated inflation
-    investment_timespan.addEventListener('change', function () {
-        investment_timespan_text.innerHTML = this.value;
-        updateChart();
+    estimated_inflation.addEventListener('change', function () {
+        updateValue(this);
     });
-    investment_timespan.addEventListener('input', function () {
-        investment_timespan_text.innerHTML = this.value;
+    estimated_inflation.addEventListener('input', function () {
+        updateValue(this);
     });
+
+
 
     var radios = document.querySelectorAll('[name="contribution_period"], [name="compound_period"]');
     for (var j = 0; j < radios.length; j++) {
