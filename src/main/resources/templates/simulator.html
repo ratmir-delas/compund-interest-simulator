@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.5, user-scalable=yes">
     <title data-lang-key="title"></title>
     <link rel="icon" href="/assets/img/budget.png">
-    <!-- Links para folhas de estilo externas -->
+    <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/simulator.css?v=1">
+    <link rel="stylesheet" href="/assets/css/simulator.css">
 </head>
 <body>
 
     <h2 id="title-simulator" data-lang-key="title"></h2>
 
     <div id="container-simulator">
-        <!-- Seção de gráfico -->
+        <!-- Graphic section -->
         <div id="container-graphic">
             <div id="sub-container-graphic" class="text-center">
                 <div data-lang-key="futureBalance"></div>
@@ -27,29 +27,27 @@
             </div>
         </div>
 
-        <!-- Seção de formulário -->
+        <!-- Form section -->
         <div id="container-form">
             <div id="sub-container-form">
-                <!-- Grupo de formulário para o depósito inicial -->
+                <!-- Form group for initial deposit -->
                 <div class="form-group mb-4">
                     <label for="initial_deposit" data-lang-key="initialDeposit"></label>
-                    <div class="">
-                        <!-- Input com botões para aumentar ou diminuir o valor -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="initial_deposit">&minus;</button>
-                            </div>
-                            <input class="form-control text-center" id="initial_deposit" type="text" name="initial_deposit" min="100" max="1000000" step="100" value="5000€" data-value="5000" data-prepend="">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" data-counter="add" data-field="initial_deposit">&plus;</button>
-                            </div>
+                    <!-- Input with add and sub buttons -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button" data-counter="sub" data-field="initial_deposit">&minus;</button>
+                        </div>
+                        <input class="form-control text-center" id="initial_deposit" type="text" name="initial_deposit" min="100" max="1000000" step="100" value="5000€" data-value="5000" data-prepend="">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" data-counter="add" data-field="initial_deposit">&plus;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Grupo de formulário para as contribuições -->
+                <!-- Form group for contributions  -->
                 <div class="form-group">
-                    <label for="contribution_amount" data-lang-key="contributions">Contribuições</label>
+                    <label for="contribution_amount" data-lang-key="contributions"></label>
                     <div class="">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -74,7 +72,7 @@
 
                 </div>
 
-                <!-- Grupo de formulário para a duração do investimento -->
+                <!-- Form group for investment period -->
                 <div class="form-group">
                     <label for="investment_timespan" data-lang-key="investmentDuration"></label>
                     <div class="">
@@ -88,15 +86,14 @@
                 <!-- Group form for estimated return tax -->
                 <div class="form-group">
                     <label for="estimated_return" data-lang-key="estimatedReturn"></label>
-                    <div class="">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_return">&minus;</button>
-                            </div>
-                            <input class="form-control text-center" id="estimated_return" type="text" name="estimated_return" min="0" max="50" step="0.25" value="8%" data-value="8.00" data-append="%">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_return">&plus;</button>
-                            </div>
+                    <!-- Input with add and sub buttons -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_return">&minus;</button>
+                        </div>
+                        <input class="form-control text-center" id="estimated_return" type="text" name="estimated_return" min="0" max="50" step="0.25" value="8%" data-value="8.00" data-append="%">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_return">&plus;</button>
                         </div>
                     </div>
                 </div>
@@ -104,15 +101,14 @@
                 <!-- Group form for estimated tax -->
                 <div class="form-group">
                     <label for="estimated_tax" data-lang-key="estimatedTax"></label>
-                    <div class="">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_tax">&minus;</button>
-                            </div>
-                            <input class="form-control text-center" id="estimated_tax" type="text" name="estimated_tax" min="0" max="50" step="0.25" value="20%" data-value="20.00" data-append="%">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_tax">&plus;</button>
-                            </div>
+                    <!-- Input with add and sub buttons -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_tax">&minus;</button>
+                        </div>
+                        <input class="form-control text-center" id="estimated_tax" type="text" name="estimated_tax" min="0" max="50" step="0.25" value="20%" data-value="20.00" data-append="%">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_tax">&plus;</button>
                         </div>
                     </div>
                 </div>
@@ -120,20 +116,19 @@
                 <!-- Group form for estimated inflation rate -->
                 <div class="form-group">
                     <label for="estimated_inflation" data-lang-key="estimatedInflation"></label>
-                    <div class="">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_inflation">&minus;</button>
-                            </div>
-                            <input class="form-control text-center" id="estimated_inflation" type="text" name="estimated_inflation" min="0" max="50" step="0.25" value="6%" data-value="6.00" data-append="%">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_inflation">&plus;</button>
-                            </div>
+                    <!-- Input with add and sub buttons -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button" data-counter="sub" data-field="estimated_inflation">&minus;</button>
+                        </div>
+                        <input class="form-control text-center" id="estimated_inflation" type="text" name="estimated_inflation" min="0" max="50" step="0.25" value="6%" data-value="6.00" data-append="%">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" data-counter="add" data-field="estimated_inflation">&plus;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Grupo de formulário para a frequência da capitalização -->
+                <!-- Form group for capitalization frequency -->
                 <div class="form-group">
                     <div class="">
                         <label data-lang-key="capitalizationFrequency"></label> <br>
@@ -154,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- Grupo de formulário para limpar e reinciar -->
+                <!-- Reset and save buttons -->
                 <div class="form-group">
                     <div class="input-group">
                         <button id="button-reset" class="btn btn-primary btn-wide">&#x21bb; <span data-lang-key="resetButton"></span></button>
@@ -170,11 +165,12 @@
 
     </div>
 
+    <!-- History section -->
     <div id="container-history" style="margin-top: 50px">
         <div id="sub-container-history">
             <div id="history">
                 <div id="history-title">
-                    <h2 data-lang-key="history">Histórico</h2>
+                    <h2 data-lang-key="history"></h2>
                 </div>
                 <div id="history-content">
                     <div id="history-content-table">
@@ -204,8 +200,8 @@
     <!-- External scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/cookies.js"></script>
-    <script src="/assets/js/simulator.js"></script>
-    <script src="/assets/js/internationalisation/pages-translation/simulator.js"></script>
+    <script src="/assets/js/simulator.js?v=1"></script>
+    <script src="/assets/js/internationalisation/pages-translation/simulator.js?v=1"></script>
     <script>
         let language = "pt";
         if (getCookie("userInfo") !== "") {

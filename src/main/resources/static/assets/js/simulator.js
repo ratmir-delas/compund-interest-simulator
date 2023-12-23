@@ -45,10 +45,10 @@ function initializeInvestmentSimulator(translations) {
             labels.push(y);
         }
 
-        var principal_dataset = { label: 'Montante Principal', backgroundColor: 'rgb(0, 123, 255)', data: [] };
-        var interest_dataset = { label: "Juro", backgroundColor: 'rgb(23, 162, 184)', data: [] };
-        var tax_dataset = { label: "Imposto", backgroundColor: 'rgb(220, 53, 69)', data: [] };
-        var inflation_dataset = { label: "Inflação", backgroundColor: 'rgb(255, 193, 7)', data: [] };
+        var principal_dataset = { label: translations.principalAmount, backgroundColor: 'rgb(0, 123, 255)', data: [] };
+        var interest_dataset = { label: translations.interest, backgroundColor: 'rgb(23, 162, 184)', data: [] };
+        var tax_dataset = { label: translations.tax, backgroundColor: 'rgb(220, 53, 69)', data: [] };
+        var inflation_dataset = { label: translations.inflation, backgroundColor: 'rgb(255, 193, 7)', data: [] };
 
         var balance = _initial_deposit;
         var cumulativeInterest = 0, cumulativeTax = 0, cumulativeInflation = 0;
