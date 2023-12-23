@@ -24,6 +24,7 @@ const translations = {
         "action": "Ação",
         "history": "Histórico",
         "delete": "Apagar",
+        "alreadyExists": "Um cálculo com estes valores já existe no histórico!",
     },
     "pt-br": {
         "title": "Simulador de Juros Compostos",
@@ -50,6 +51,7 @@ const translations = {
         "action": "Ação",
         "history": "Histórico",
         "delete": "Apagar",
+        "alreadyExists": "Um cálculo com estes valores já existe no histórico!",
     },
     "en": {
         "title": "Compound Interest Simulator",
@@ -76,6 +78,7 @@ const translations = {
         "action": "Action",
         "history": "History",
         "delete": "Delete",
+        "alreadyExists": "A calculation with these values already exists in the history!",
     },
     "de": {
         "title": "Zinseszinsrechner",
@@ -102,6 +105,7 @@ const translations = {
         "action": "Aktion",
         "history": "Geschichte",
         "delete": "Löschen",
+        "alreadyExists": "Eine Berechnung mit diesen Werten existiert bereits in der Historie!",
     },
     "es": {
         "title": "Simulador de Interés Compuesto",
@@ -128,6 +132,7 @@ const translations = {
         "action": "Acción",
         "history": "Historia",
         "delete": "Borrar",
+        "alreadyExists": "¡Un cálculo con estos valores ya existe en el historial!",
     },
     "fr": {
         "title": "Simulateur d'Intérêt Composé",
@@ -154,6 +159,7 @@ const translations = {
         "action": "Action",
         "history": "Histoire",
         "delete": "Supprimer",
+        "alreadyExists": "Un calcul avec ces valeurs existe déjà dans l'historique!",
     }
     // ... add other languages as needed
 };

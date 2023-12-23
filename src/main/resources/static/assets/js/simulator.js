@@ -14,43 +14,8 @@ function initializeInvestmentSimulator(translations) {
         estimated_tax = document.querySelector('#estimated_tax')
     ;
 
-    // Refresh the chart when the inflation or tax rate changes
-    function updateValue(element, action) {
-        var min = parseFloat(element.getAttribute('min')),
-            max = parseFloat(element.getAttribute('max')),
-            step = parseFloat(element.getAttribute('step')) || 1,
-            oldValue = element.dataset.value || element.defaultValue || 0,
-            newValue = parseFloat(element.value.replace(/€/, ''));
 
-        // Verifies if the newValue is a number, if not, reverts to oldValue
-        if (isNaN(parseFloat(newValue))) {
-            newValue = oldValue;
-        } else {
-            // Check if the newValue is a number, if not, revert to oldValue
-            if (isNaN(newValue)) {
-                newValue = oldValue;
-            } else {
-                if (action === 'add') {
-                    newValue += step; // Increment and cap at max
-                } else if (action === 'sub') {
-                    newValue -= step; // Decrement and cap at min
-                }
-
-                if (newValue >= max) {
-                    alert(translations.maxValueReached);
-                    newValue = Math.max(Math.min(newValue, max), min);
-                }
-            }
-
-            //newValue = newValue < min ? min : newValue > max ? max : newValue;
-        }
-
-        // Update element value
-        element.dataset.value = newValue;
-        element.value = (element.dataset.prepend || '') + newValue + (element.dataset.append || '');
-
-        updateChart();
-    }
+    ////////////////////////////////////////////// GRAPHIC SECTION ///////////////////////////////////////////////////
 
     // getChartData() explanation
     /*
@@ -124,7 +89,8 @@ function initializeInvestmentSimulator(translations) {
         };
     }
 
-    // Atualiza o gráfico
+
+    // Update chart data
     function updateChart() {
         var data = getChartData();
 
@@ -134,60 +100,6 @@ function initializeInvestmentSimulator(translations) {
         chart.data.datasets[2].data = data.datasets[2].data;
         chart.data.datasets[3].data = data.datasets[3].data;
         chart.update();
-    }
-
-    // Initial deposit
-    initial_deposit.addEventListener('change', function () {
-        updateValue(this);
-    });
-    initial_deposit.addEventListener('input', function () {
-        updateValue(this);
-    });
-
-    // Contribution amount
-    contribution_amount.addEventListener('change', function () {
-        updateValue(this);
-    });
-    contribution_amount.addEventListener('input', function () {
-        updateValue(this);
-    });
-
-    // Estimated return
-    estimated_return.addEventListener('change', function () {
-        updateValue(this);
-    });
-    estimated_return.addEventListener('input', function () {
-        updateValue(this);
-    });
-
-    // Estimated inflation
-    investment_timespan.addEventListener('change', function () {
-        investment_timespan_text.innerHTML = this.value;
-        updateChart();
-    });
-    investment_timespan.addEventListener('input', function () {
-        investment_timespan_text.innerHTML = this.value;
-    });
-
-    var radios = document.querySelectorAll('[name="contribution_period"], [name="compound_period"]');
-    for (var j = 0; j < radios.length; j++) {
-        radios[j].addEventListener('change', updateChart);
-    }
-
-    var buttons = document.querySelectorAll('[data-counter]');
-
-    // Adiciona um event listener a cada botão
-    for (var i = 0; i < buttons.length; i++) {
-        var button = buttons[i];
-
-        button.addEventListener('click', function () {
-            var field = document.querySelector('[name="' + this.dataset.field + '"]'),
-                action = this.dataset.counter;
-
-            if (field) {
-                updateValue(field, action);
-            }
-        });
     }
 
     // Configuração do gráfico
@@ -233,9 +145,105 @@ function initializeInvestmentSimulator(translations) {
             }
         });
 
-    //////////////////CÓDIGO PERSONALIZADO//////////////////////
+    ////////////////////////////////////////////// FORM BUTTONS SECTION ///////////////////////////////////////////////////
 
-    /// Função para redefinir os valores dos campos de entrada para o estado inicial
+    // Refresh the chart when the inflation or tax rate changes
+    function updateValue(element, action) {
+        var min = parseFloat(element.getAttribute('min')),
+            max = parseFloat(element.getAttribute('max')),
+            step = parseFloat(element.getAttribute('step')) || 1,
+            oldValue = element.dataset.value || element.defaultValue || 0,
+            newValue = parseFloat(element.value.replace(/€/, ''));
+
+        // Verifies if the newValue is a number, if not, reverts to oldValue
+        if (isNaN(parseFloat(newValue))) {
+            newValue = oldValue;
+        } else {
+            // Check if the newValue is a number, if not, revert to oldValue
+            if (isNaN(newValue)) {
+                newValue = oldValue;
+            } else {
+                if (action === 'add') {
+                    newValue += step; // Increment and cap at max
+                } else if (action === 'sub') {
+                    newValue -= step; // Decrement and cap at min
+                }
+
+                if (newValue >= max) {
+                    alert(translations.maxValueReached);
+                    newValue = Math.max(Math.min(newValue, max), min);
+                }
+            }
+
+            //newValue = newValue < min ? min : newValue > max ? max : newValue;
+        }
+
+        // Prevent newValue from going below the minimum value
+        newValue = Math.max(newValue, min);
+
+        // Update element value
+        element.dataset.value = newValue;
+        element.value = (element.dataset.prepend || '') + newValue + (element.dataset.append || '€');
+
+        updateChart();
+    }
+
+    // Initial deposit
+    initial_deposit.addEventListener('change', function () {
+        updateValue(this);
+    });
+    initial_deposit.addEventListener('input', function () {
+        updateValue(this);
+    });
+
+    // Contribution amount
+    contribution_amount.addEventListener('change', function () {
+        updateValue(this);
+    });
+    contribution_amount.addEventListener('input', function () {
+        updateValue(this);
+    });
+
+    // Estimated return
+    estimated_return.addEventListener('change', function () {
+        updateValue(this);
+    });
+    estimated_return.addEventListener('input', function () {
+        updateValue(this);
+    });
+
+    // Estimated inflation
+    investment_timespan.addEventListener('change', function () {
+        investment_timespan_text.innerHTML = this.value;
+        updateChart();
+    });
+    investment_timespan.addEventListener('input', function () {
+        investment_timespan_text.innerHTML = this.value;
+    });
+
+    var radios = document.querySelectorAll('[name="contribution_period"], [name="compound_period"]');
+    for (var j = 0; j < radios.length; j++) {
+        radios[j].addEventListener('change', updateChart);
+    }
+
+    var buttons = document.querySelectorAll('[data-counter]');
+
+    // Add event listeners to increment and decrement buttons
+    for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+
+        button.addEventListener('click', function () {
+            var field = document.querySelector('[name="' + this.dataset.field + '"]'),
+                action = this.dataset.counter;
+
+            if (field) {
+                updateValue(field, action);
+            }
+        });
+    }
+
+
+    // Reset button
     function resetValues() {
         // Redefine cada campo de entrada para o seu valor inicial
         document.getElementById('initial_deposit').value = '5000€';
@@ -251,49 +259,63 @@ function initializeInvestmentSimulator(translations) {
     // Adiciona um event listener ao botão de reset
     document.getElementById('button-reset').addEventListener('click', resetValues);
 
-    /// Incrementar e decrementar os valores dos campos de entrada
-    // Variável para armazenar o timer
-    var repeatTimer;
+
+
+    /// Increment and decrement buttons
+    // Variable to store the timer and timeout
+    var repeatTimer, startTimer;
 
     function startIncrementing(field, action) {
-        // Função para atualizar o valor
+        // Function to update the value
         function increment() {
             updateValue(field, action);
         }
 
-        // Define a velocidade com base no campo
+        // Define the speed based on the field
         var time;
         if (field.name === "estimated_return") {
-            time = 300; // Velocidade mais lenta para 'estimated_return'
+            time = 300;
         } else if (field.name === "initial_deposit") {
-            time = 100; // Velocidade mais lenta para 'estimated_return'
+            time = 100;
         } else {
-            time = 200; // Velocidade padrão para outros campos
+            time = 200;
         }
 
-        // Inicia o timer
-        //increment();
-        repeatTimer = setInterval(increment, time);
+        // Clear any existing timer to prevent multiple intervals
+        clearInterval(repeatTimer);
+
+        // Start incrementing after a specified delay (500ms)
+        startTimer = setTimeout(function() {
+            repeatTimer = setInterval(increment, time);
+        }, 500); // Delay of 500 milliseconds
     }
 
     function stopIncrementing() {
+        // Clear both the interval and the delayed start timer
         clearInterval(repeatTimer);
+        clearTimeout(startTimer);
+        repeatTimer = null;
+        startTimer = null;
     }
 
-    // Adiciona eventos aos botões
-    //var buttons = document.querySelectorAll('[data-counter]');
-    buttons.forEach(function (button) {
-        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
-
-        button.addEventListener(isTouchDevice ? 'touchstart' : 'mousedown', function () {
+    // Add event listeners to increment and decrement buttons
+    buttons.forEach(function(button) {
+        button.addEventListener('mousedown', function() {
             var field = document.querySelector('[name="' + this.dataset.field + '"]');
             var action = this.dataset.counter;
             startIncrementing(field, action);
         });
 
-        button.addEventListener(isTouchDevice ? 'touchend' : 'mouseup', stopIncrementing);
+        // Stop incrementing when mouse leaves the button while pressed
+        button.addEventListener('mouseleave', stopIncrementing);
     });
 
+    // Listen for mouseup on the entire document
+    document.addEventListener('mouseup', stopIncrementing);
+
+
+
+    ////////////////////////////////////////////// HISTORY SECTION ///////////////////////////////////////////////////
 
     // Save calculation to history
     document.getElementById('button-save').addEventListener('click', function() {
@@ -301,11 +323,13 @@ function initializeInvestmentSimulator(translations) {
         var initialDeposit = document.getElementById('initial_deposit').value;
         var contribution = document.getElementById('contribution_amount').value;
         var returnRate = document.getElementById('estimated_return').value;
-        var finalBalance = document.getElementById('future_balance').textContent;
+        var inflationRate = document.getElementById('estimated_return').value;
+        var taxRate = document.getElementById('estimated_return').value;
+        var futureBalance = document.getElementById('future_balance').textContent;
 
         // Check for duplicate calculations
-        if (isDuplicateCalculation(duration, initialDeposit, contribution, returnRate)) {
-            alert('Um cálculo com estes valores já existe no histórico!');
+        if (isDuplicateCalculation(duration, initialDeposit, contribution, returnRate, inflationRate, taxRate, futureBalance)) {
+            alert(translations.alreadyExists);
             return;
         }
 
@@ -316,12 +340,16 @@ function initializeInvestmentSimulator(translations) {
         <td>${initialDeposit}</td>
         <td>${contribution}</td>
         <td>${returnRate}</td>
-        <td>${finalBalance}</td>
+        <td>${inflationRate}</td>
+        <td>${taxRate}</td>
+        <td>${futureBalance}</td>
         <td><button class="delete-row-btn" data-lang-key="delete">Eliminar</button></td>`;
 
         newRow.onclick = function() {
             document.getElementById('investment_timespan').value = duration;
             document.getElementById('initial_deposit').value = initialDeposit;
+            document.getElementById('estimated_tax').value = initialDeposit;
+            document.getElementById('estimated_inflation').value = initialDeposit;
             document.getElementById('contribution_amount').value = contribution;
             document.getElementById('estimated_return').value = returnRate;
             updateChart();
