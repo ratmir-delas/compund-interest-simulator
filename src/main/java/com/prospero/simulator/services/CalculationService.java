@@ -19,12 +19,27 @@ public class CalculationService {
         return calculationRepository.findById(id).orElse(null);
     }
 
+    public boolean isCalculationStored(Calculation calculation) {
+        List<Calculation> calculations = getAllCalculationsByUserId(calculation.getUser().getUser_id());
+        for (Calculation c : calculations) {
+            if (c.equals(calculation)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Calculation> getAllCalculations() {
         return calculationRepository.findAll();
     }
 
     public List<Calculation> getAllCalculationsByUserId(Long userId) {
         return calculationRepository.findByUserId(userId);
+    }
+
+    // countByUserId() is used in CalculationController.java
+    public int countByUserId(Long userId) {
+        return calculationRepository.countByUserId(userId);
     }
 
     public void addCalculation(Calculation calculation) {
@@ -38,6 +53,7 @@ public class CalculationService {
     public void updateCalculation(Long id, Calculation updatedCalculation) {
         Calculation calculation = calculationRepository.findById(id).orElse(null);
         if (calculation != null) {
+            calculation.setName(updatedCalculation.getName());
             calculation.setInitialAmount(updatedCalculation.getInitialAmount());
             calculation.setContributionAmount(updatedCalculation.getContributionAmount());
             calculation.setContributionFrequency(updatedCalculation.getContributionFrequency());

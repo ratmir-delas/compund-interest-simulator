@@ -11,6 +11,7 @@ public class Calculation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calculation_id")
     private Long calculation_id;
+    private String name;
     private int initialAmount;
     private int contributionAmount;
     private int contributionFrequency;
@@ -26,7 +27,8 @@ public class Calculation {
     public Calculation() {
     }
 
-    public Calculation(int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
+    public Calculation(String name, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
+        this.name = name;
         this.initialAmount = initialAmount;
         this.contributionAmount = contributionAmount;
         this.contributionFrequency = contributionFrequency;
@@ -38,8 +40,9 @@ public class Calculation {
         this.user = user;
     }
 
-    public Calculation(Long calculation_id, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
+    public Calculation(Long calculation_id, String name, int initialAmount, int contributionAmount, int contributionFrequency, int investmentPeriod, int estimatedReturn, int estimatedInflation, int estimatedTax, int capitalizationFrequency, User user) {
         this.calculation_id = calculation_id;
+        this.name = name;
         this.initialAmount = initialAmount;
         this.contributionAmount = contributionAmount;
         this.contributionFrequency = contributionFrequency;
@@ -57,6 +60,14 @@ public class Calculation {
 
     public void setCalculation_id(Long id) {
         this.calculation_id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getInitialAmount() {
@@ -136,18 +147,19 @@ public class Calculation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calculation that = (Calculation) o;
-        return initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency && Objects.equals(calculation_id, that.calculation_id) && Objects.equals(user, that.user);
+        return initialAmount == that.initialAmount && contributionAmount == that.contributionAmount && contributionFrequency == that.contributionFrequency && investmentPeriod == that.investmentPeriod && estimatedReturn == that.estimatedReturn && estimatedInflation == that.estimatedInflation && estimatedTax == that.estimatedTax && capitalizationFrequency == that.capitalizationFrequency && Objects.equals(calculation_id, that.calculation_id) && Objects.equals(name, that.name) && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(calculation_id, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency, user);
+        return Objects.hash(calculation_id, name, initialAmount, contributionAmount, contributionFrequency, investmentPeriod, estimatedReturn, estimatedInflation, estimatedTax, capitalizationFrequency, user);
     }
 
     @Override
     public String toString() {
         return "Calculation{" +
                 "calculation_id=" + calculation_id +
+                ", name='" + name + '\'' +
                 ", initialAmount=" + initialAmount +
                 ", contributionAmount=" + contributionAmount +
                 ", contributionFrequency=" + contributionFrequency +
